@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Екатерина Крутакова](https://up.htmlacademy.ru/react/1/user/234149).
-* Наставник: `Неизвестно`.
+* Наставник:  [Сергей Рубец](https://htmlacademy.ru/profile/amator).
 
 ---
 
