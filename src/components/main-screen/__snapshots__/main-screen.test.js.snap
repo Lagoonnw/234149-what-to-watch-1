@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main screen should render correctly Should render main screen with 4 movies 1`] = `
+exports[`Main screen should render correctly Should render main-screen with moviesList length 1`] = `
 Array [
   <div
     className="visually-hidden"
