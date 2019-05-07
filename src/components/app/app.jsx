@@ -1,5 +1,5 @@
 import React from 'react';
 import {MainScreen} from "../main-screen/main-screen.jsx";
+import {films} from "../../mocks/films";
 
-const moviesList = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`, `Snatch`];
-export const App = () => <MainScreen moviesList={moviesList}/>;
+export const App = () => <MainScreen moviesList={films}/>;

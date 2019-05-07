@@ -4,7 +4,7 @@ import {Header} from "./header.jsx";
 
 describe(`Header should render`, () => {
   test(`Should render header component correctly`, () => {
-    const tree = renderer.create(<Header/>);
+    const tree = renderer.create(<Header/>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

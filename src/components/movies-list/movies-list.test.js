@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {MainScreen} from './main-screen.jsx';
+import {MoviesList} from "./movies-list";
 
 const mock = [
   {
@@ -17,9 +17,9 @@ const mock = [
   }
 ];
 
-describe(`Main screen should render correctly`, () => {
-  test(`Should render main-screen with moviesList length`, () => {
-    const tree = renderer.create(<MainScreen moviesList={mock}/>).toJSON();
+describe(`MoviesList render`, () => {
+  test(`Should render MoviesList correctly`, () => {
+    const tree = renderer.create(<MoviesList movies={mock}/>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
