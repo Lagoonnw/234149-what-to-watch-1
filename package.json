@@ -35,6 +35,8 @@
     "react-dom": "16.8.6"
   },
   "jest": {
-    "setupFiles": ["<rootDir>/enzyme.config.js"]
+    "setupFiles": [
+      "<rootDir>/enzyme.config.js"
+    ]
   }
 }
