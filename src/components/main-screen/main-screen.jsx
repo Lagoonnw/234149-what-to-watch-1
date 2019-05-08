@@ -1,8 +1,10 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
+import {Header} from "../header/header.jsx";
+import {MoviesList} from "../movies-list/movies-list.jsx";
 
 export const MainScreen = (props) => {
-  const {moviesList, onMovieCardClick} = props;
+  const {moviesList} = props;
   return (
     <Fragment>
       <div className="visually-hidden">
@@ -44,21 +46,7 @@ export const MainScreen = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
-          </div>
-        </header>
+        <Header/>
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -128,21 +116,7 @@ export const MainScreen = (props) => {
               <a href="#" className="catalog__genres-link">Thrillers</a>
             </li>
           </ul>
-
-          <div className="catalog__movies-list">
-            {moviesList.map((value) =>
-              <article className="small-movie-card catalog__movies-card" key={`movie-${value}`}>
-                <button className="small-movie-card__play-btn" type="button">Play</button>
-                <div className="small-movie-card__image">
-                  <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={value} width="280" height="175"/>
-                </div>
-                <h3 className="small-movie-card__title" tabIndex={0} onClick={onMovieCardClick}>
-                  <a className="small-movie-card__link" href="movie-page.html">{value}</a>
-                </h3>
-              </article>
-            )}
-          </div>
-
+          <MoviesList movies={moviesList}/>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
@@ -167,7 +141,9 @@ export const MainScreen = (props) => {
 };
 
 MainScreen.propTypes = {
-  moviesList: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onMovieCardClick: PropTypes.func
+  moviesList: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    imgSrc: PropTypes.string.isRequired
+  })).isRequired
 };
 

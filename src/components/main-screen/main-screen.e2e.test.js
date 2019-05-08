@@ -1,15 +1,29 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 import {MainScreen} from "./main-screen";
 
-const moviesList = [`Fantastic Beasts`];
+const mock = [
+  {
+    id: 546464,
+    name: `Snatch`,
+    imgSrc: ``
+  },
+  {
+    id: 9898787,
+    name: `Pulp Fiction`,
+    imgSrc: ``
+  },
+  {
+    id: 5487878,
+    name: `The Witcher`,
+    imgSrc: ``
+  }
+];
 
 describe(`Small movie card click`, () => {
-  test(`Should call clickHandler on a card header click`, () => {
-    const clickHandler = jest.fn();
-    const component = shallow(<MainScreen moviesList={moviesList} onMovieCardClick={clickHandler}/>);
-    const movieCardHeader = component.find(`.small-movie-card__title`);
-    movieCardHeader.simulate(`click`);
-    expect(clickHandler).toHaveBeenCalled();
+  test(`Should render moviesList with mock length`, () => {
+    const component = mount(<MainScreen moviesList={mock}/>);
+    const moviesList = component.find(`.catalog__movies-list`);
+    expect(moviesList.children()).toHaveLength(mock.length);
   });
 });
