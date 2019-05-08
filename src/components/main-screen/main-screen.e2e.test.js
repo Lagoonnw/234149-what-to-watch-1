@@ -4,14 +4,17 @@ import {MainScreen} from "./main-screen";
 
 const mock = [
   {
+    id: 546464,
     name: `Snatch`,
     imgSrc: ``
   },
   {
+    id: 9898787,
     name: `Pulp Fiction`,
     imgSrc: ``
   },
   {
+    id: 5487878,
     name: `The Witcher`,
     imgSrc: ``
   }

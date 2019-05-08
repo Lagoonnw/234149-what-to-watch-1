@@ -4,14 +4,17 @@ import {MoviesList} from "./movies-list";
 
 const mock = [
   {
+    id: 54545454,
     name: `Snatch`,
     imgSrc: ``
   },
   {
+    id: 9898988,
     name: `Pulp Fiction`,
     imgSrc: ``
   },
   {
+    id: 545468787,
     name: `The Witcher`,
     imgSrc: ``
   }

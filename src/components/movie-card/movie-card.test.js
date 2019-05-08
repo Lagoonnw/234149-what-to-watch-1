@@ -5,6 +5,7 @@ import {MovieCard} from './movie-card.jsx';
 describe(`MovieCard render`, () => {
   test(`Should render movie card`, () => {
     const mock = {
+      id: 54545454,
       name: `Need Mass Effect movie`,
       imgSrc: ``,
       onMouseEnter: jest.fn(),

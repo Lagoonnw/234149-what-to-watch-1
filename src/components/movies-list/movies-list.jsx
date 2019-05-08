@@ -22,9 +22,9 @@ export class MoviesList extends PureComponent {
   }
 
   _getMovie(movie) {
-    const mouseEnterHandler = () => this._mouseEnterHandler(movie);
+    const mouseEnterHandler = () => this._mouseEnterHandler(movie.id);
     return (
-      <div className="catalog__movies-card__wrapper" key={`movie-${movie.name}`} onMouseEnter={mouseEnterHandler}>
+      <div className="catalog__movies-card__wrapper" key={movie.id} onMouseEnter={mouseEnterHandler}>
         <MovieCard onClick={this._handleMouseEvents} {...movie} />
       </div>
     );
@@ -41,6 +41,7 @@ export class MoviesList extends PureComponent {
 
 MoviesList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     imgSrc: PropTypes.string.isRequired
   }))

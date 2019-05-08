@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const MovieCard = (props) => {
-  const {name, imgSrc, onClick} = props;
-  const clickHandler = () => onClick({name, imgSrc});
+  const {id, name, imgSrc, onClick} = props;
+  const clickHandler = () => onClick(id);
 
   return (
     <article className="small-movie-card catalog__movies-card">
@@ -19,6 +19,7 @@ export const MovieCard = (props) => {
 };
 
 MovieCard.propTypes = {
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired
