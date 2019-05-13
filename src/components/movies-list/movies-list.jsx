@@ -8,7 +8,6 @@ export class MoviesList extends PureComponent {
     this.state = {
       activeMovieCard: null
     };
-    this._handleMouseEvents = this._handleMouseEvents.bind(this);
   }
 
   render() {
@@ -23,19 +22,26 @@ export class MoviesList extends PureComponent {
 
   _getMovie(movie) {
     const mouseEnterHandler = () => this._mouseEnterHandler(movie.id);
+    const mouseLeaveHandler = () => this._mouseLeaveHandler();
+    const isPlaying = Boolean(movie.id === this.state.activeMovieCard);
     return (
-      <div className="catalog__movies-card__wrapper" key={movie.id} onMouseEnter={mouseEnterHandler}>
-        <MovieCard onClick={this._handleMouseEvents} {...movie} />
+      <div
+        className="catalog__movies-card__wrapper"
+        key={movie.id}
+        onMouseEnter={mouseEnterHandler}
+        onMouseLeave={mouseLeaveHandler}
+      >
+        <MovieCard isPlaying={isPlaying} {...movie} />
       </div>
     );
   }
 
-  _handleMouseEvents(activeMovieCard) {
-    this.setState({activeMovieCard});
+  _mouseEnterHandler(activeMovieCard) {
+    setTimeout(() => this.setState({activeMovieCard}), 1000);
   }
 
-  _mouseEnterHandler(activeMovieCard) {
-    this.setState({activeMovieCard});
+  _mouseLeaveHandler() {
+    this.setState({activeMovieCard: null});
   }
 }
 
