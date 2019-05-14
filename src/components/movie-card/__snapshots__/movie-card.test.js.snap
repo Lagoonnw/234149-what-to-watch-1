@@ -3,22 +3,20 @@
 exports[`MovieCard render Should render movie card 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  onMouseEnter={[Function]}
+  onMouseLeave={[MockFunction]}
 >
-  <button
-    className="small-movie-card__play-btn"
-    onClick={[Function]}
-    type="button"
-  >
-    Play
-  </button>
   <div
     className="small-movie-card__image"
   >
-    <img
-      alt="Need Mass Effect movie"
-      height="175"
-      src=""
-      width="280"
+    <video
+      autoPlay={false}
+      controls={false}
+      height="175px"
+      muted={true}
+      poster="pic.jpg"
+      src="video.mp4"
+      width="280px"
     />
   </div>
   <h3

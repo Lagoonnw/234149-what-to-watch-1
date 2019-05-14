@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {MovieCard} from "../movie-card/movie-card.jsx";
+import {VIDEO_PLAY_DELAY_TIME} from "../../constants/constants";
 
 export class MoviesList extends PureComponent {
   constructor(props) {
@@ -8,6 +9,8 @@ export class MoviesList extends PureComponent {
     this.state = {
       activeMovieCard: null
     };
+    this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
+    this._mouseLeaveHandler = this._mouseLeaveHandler.bind(this);
   }
 
   render() {
@@ -21,23 +24,21 @@ export class MoviesList extends PureComponent {
   }
 
   _getMovie(movie) {
-    const mouseEnterHandler = () => this._mouseEnterHandler(movie.id);
-    const mouseLeaveHandler = () => this._mouseLeaveHandler();
     const isPlaying = Boolean(movie.id === this.state.activeMovieCard);
+
     return (
-      <div
-        className="catalog__movies-card__wrapper"
+      <MovieCard
         key={movie.id}
-        onMouseEnter={mouseEnterHandler}
-        onMouseLeave={mouseLeaveHandler}
-      >
-        <MovieCard isPlaying={isPlaying} {...movie} />
-      </div>
+        isPlaying={isPlaying}
+        onMouseLeave={this._mouseLeaveHandler}
+        onMouseEnter={this._mouseEnterHandler}
+        {...movie}
+      />
     );
   }
 
   _mouseEnterHandler(activeMovieCard) {
-    setTimeout(() => this.setState({activeMovieCard}), 1000);
+    setTimeout(() => this.setState({activeMovieCard}), VIDEO_PLAY_DELAY_TIME);
   }
 
   _mouseLeaveHandler() {

@@ -6,17 +6,26 @@ const mock = [
   {
     id: 546464,
     name: `Snatch`,
-    imgSrc: ``
+    imgSrc: `pic.jpg`,
+    src: `video.mp4`,
+    onMouseEnter: jest.fn(),
+    onMouseLeave: jest.fn()
   },
   {
     id: 9898787,
     name: `Pulp Fiction`,
-    imgSrc: ``
+    imgSrc: `pic.jpg`,
+    src: `video.mp4`,
+    onMouseEnter: jest.fn(),
+    onMouseLeave: jest.fn()
   },
   {
     id: 5487878,
     name: `The Witcher`,
-    imgSrc: ``
+    imgSrc: `pic.jpg`,
+    src: `video.mp4`,
+    onMouseEnter: jest.fn(),
+    onMouseLeave: jest.fn()
   }
 ];
 

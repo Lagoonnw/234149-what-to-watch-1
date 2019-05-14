@@ -2,21 +2,36 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {MovieCard} from "./movie-card";
 
-describe(`MovieCard clickEvent test`, () => {
-  test(`Should return correct MovieCard in clickHandler`, () => {
+describe(`MovieCard mouse events test`, () => {
+  test(`Should call onMouseEnter`, () => {
     const movieMock = {
       id: 45465454,
       name: `Avengers`,
-      imgSrc: ``
-    };
-    const mock = Object.assign(movieMock, {
+      imgSrc: `pic.jpg`,
+      src: `video.mp4`,
       onMouseEnter: jest.fn(),
-      onClick: jest.fn(() => movieMock.id)
-    });
-    const component = shallow(<MovieCard {...mock}/>);
+      onMouseLeave: jest.fn()
+    };
+    const component = shallow(<MovieCard {...movieMock}/>);
     const card = component.find(`.small-movie-card`);
     card.simulate(`mouseenter`);
-    card.find(`.small-movie-card__play-btn`).simulate(`click`);
-    expect(mock.onClick).toHaveReturnedWith(movieMock.id);
+
+    expect(movieMock.onMouseEnter).toHaveBeenCalled();
+  });
+
+  test(`Should call onMouseLeave`, () => {
+    const movieMock = {
+      id: 45465454,
+      name: `Avengers`,
+      imgSrc: ``,
+      src: ``,
+      onMouseEnter: jest.fn(),
+      onMouseLeave: jest.fn()
+    };
+    const component = shallow(<MovieCard {...movieMock}/>);
+    const card = component.find(`.small-movie-card`);
+    card.simulate(`mouseleave`);
+
+    expect(movieMock.onMouseLeave).toHaveBeenCalled();
   });
 });

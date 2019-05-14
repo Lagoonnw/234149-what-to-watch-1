@@ -377,114 +377,93 @@ Array [
       <div
         className="catalog__movies-list"
       >
-        <div
-          className="catalog__movies-card__wrapper"
+        <article
+          className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[MockFunction]}
         >
-          <article
-            className="small-movie-card catalog__movies-card"
+          <div
+            className="small-movie-card__image"
           >
-            <button
-              className="small-movie-card__play-btn"
-              onClick={[Function]}
-              type="button"
+            <video
+              autoPlay={false}
+              controls={false}
+              height="175px"
+              muted={true}
+              poster="pic.jpg"
+              src="video.mp4"
+              width="280px"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
             >
-              Play
-            </button>
-            <div
-              className="small-movie-card__image"
-            >
-              <img
-                alt="Snatch"
-                height="175"
-                src=""
-                width="280"
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="movie-page.html"
-              >
-                Snatch
-              </a>
-            </h3>
-          </article>
-        </div>
-        <div
-          className="catalog__movies-card__wrapper"
+              Snatch
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[MockFunction]}
         >
-          <article
-            className="small-movie-card catalog__movies-card"
+          <div
+            className="small-movie-card__image"
           >
-            <button
-              className="small-movie-card__play-btn"
-              onClick={[Function]}
-              type="button"
+            <video
+              autoPlay={false}
+              controls={false}
+              height="175px"
+              muted={true}
+              poster="pic.jpg"
+              src="video.mp4"
+              width="280px"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
             >
-              Play
-            </button>
-            <div
-              className="small-movie-card__image"
-            >
-              <img
-                alt="Pulp Fiction"
-                height="175"
-                src=""
-                width="280"
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="movie-page.html"
-              >
-                Pulp Fiction
-              </a>
-            </h3>
-          </article>
-        </div>
-        <div
-          className="catalog__movies-card__wrapper"
+              Pulp Fiction
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[MockFunction]}
         >
-          <article
-            className="small-movie-card catalog__movies-card"
+          <div
+            className="small-movie-card__image"
           >
-            <button
-              className="small-movie-card__play-btn"
-              onClick={[Function]}
-              type="button"
+            <video
+              autoPlay={false}
+              controls={false}
+              height="175px"
+              muted={true}
+              poster="pic.jpg"
+              src="video.mp4"
+              width="280px"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
             >
-              Play
-            </button>
-            <div
-              className="small-movie-card__image"
-            >
-              <img
-                alt="The Witcher"
-                height="175"
-                src=""
-                width="280"
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="movie-page.html"
-              >
-                The Witcher
-              </a>
-            </h3>
-          </article>
-        </div>
+              The Witcher
+            </a>
+          </h3>
+        </article>
       </div>
       <div
         className="catalog__more"
