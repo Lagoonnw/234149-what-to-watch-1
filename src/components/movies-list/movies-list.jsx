@@ -24,7 +24,7 @@ export class MoviesList extends PureComponent {
   }
 
   _getMovie(movie) {
-    const isPlaying = Boolean(movie.id === this.state.activeMovieCard);
+    const isPlaying = movie.id === this.state.activeMovieCard;
 
     return (
       <MovieCard
