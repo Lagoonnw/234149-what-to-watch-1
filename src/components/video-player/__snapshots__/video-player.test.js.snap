@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Video player snapshot Should render video player correctly 1`] = `
+<video
+  autoPlay={false}
+  controls={false}
+  height="175px"
+  muted={false}
+  poster="pic.jpg"
+  src="video.mp4"
+  width="280px"
+/>
+`;
