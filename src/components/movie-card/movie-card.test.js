@@ -1,13 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {MovieCard} from './movie-card.jsx';
-
-function createNodeMock(element) {
-  if (element.type === `video`) {
-    return {};
-  }
-  return null;
-}
+import {createNodeMock} from '../../__mock__/createMockNode';
 
 describe(`MovieCard render`, () => {
   test(`Should render movie card`, () => {
@@ -15,7 +9,8 @@ describe(`MovieCard render`, () => {
     const mock = {
       id: 54545454,
       name: `Need Mass Effect movie`,
-      imgSrc: `pic.jpg`,
+      genre: `sci-Fi`,
+      poster: `pic.jpg`,
       src: `video.mp4`,
       onMouseEnter: jest.fn(),
       onMouseLeave: jest.fn()

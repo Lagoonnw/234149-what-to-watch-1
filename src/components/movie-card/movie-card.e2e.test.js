@@ -6,8 +6,9 @@ describe(`MovieCard mouse events test`, () => {
   test(`Should call onMouseEnter`, () => {
     const movieMock = {
       id: 45465454,
+      genre: `horror`,
       name: `Avengers`,
-      imgSrc: `pic.jpg`,
+      poster: `pic.jpg`,
       src: `video.mp4`,
       onMouseEnter: jest.fn(),
       onMouseLeave: jest.fn()
@@ -23,8 +24,9 @@ describe(`MovieCard mouse events test`, () => {
     const movieMock = {
       id: 45465454,
       name: `Avengers`,
-      imgSrc: ``,
-      src: ``,
+      genre: `horror`,
+      poster: `pic.jpg`,
+      src: `video.mp4`,
       onMouseEnter: jest.fn(),
       onMouseLeave: jest.fn()
     };

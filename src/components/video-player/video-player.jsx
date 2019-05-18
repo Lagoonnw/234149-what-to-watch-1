@@ -35,7 +35,7 @@ export class VideoPlayer extends PureComponent {
 
   render() {
     const {
-      imgSrc,
+      poster,
       src,
       muted,
       autoPlay,
@@ -46,7 +46,7 @@ export class VideoPlayer extends PureComponent {
 
     return (
       <video
-        poster={imgSrc}
+        poster={poster}
         width={`${width}px`}
         height={`${height}px`}
         controls={controls}
@@ -80,7 +80,7 @@ export class VideoPlayer extends PureComponent {
 }
 
 VideoPlayer.propTypes = {
-  imgSrc: PropTypes.string.isRequired,
+  poster: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
   muted: PropTypes.bool,
   autoPlay: PropTypes.bool,
