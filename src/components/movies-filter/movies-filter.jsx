@@ -6,18 +6,25 @@ import {genresList as genres} from '../../constants/constants';
 
 export const MoviesFilter = (props) => {
   const {genresList, activeGenre, sortMovies, resetMovies} = props;
+  const _resetMovies = (evt) => {
+    evt.preventDefault();
+    resetMovies();
+  };
 
   return (
     <ul className="catalog__genres-list">
       <li
-        onClick={resetMovies}
+        onClick={_resetMovies}
         className={`catalog__genres-item ${(activeGenre === null) ? `catalog__genres-item--active` : ``}`}
         key={`All genres`}
       >
         <a href="#" className="catalog__genres-link">All genres</a>
       </li>
       {genresList.map((genre) => {
-        const onGenreClick = () => sortMovies(genre);
+        const onGenreClick = (evt) => {
+          evt.preventDefault();
+          sortMovies(genre);
+        };
 
         return (
           <li

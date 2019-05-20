@@ -36,7 +36,6 @@ const mock = [
 const initialStateMock = {
   activeGenre: null,
   movies: mock,
-  sortedMovies: mock,
   genres: Array.from(genresList)
 };
 const reducer = (state = initialStateMock) => state;

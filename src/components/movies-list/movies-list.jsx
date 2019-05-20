@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {MovieCard} from '../movie-card/movie-card.jsx';
-import {VIDEO_PLAY_DELAY_TIME} from '../../constants/constants';
+import {GenreMap, VIDEO_PLAY_DELAY_TIME} from '../../constants/constants';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../action';
 
@@ -17,11 +17,15 @@ export class MoviesList extends PureComponent {
   }
 
   render() {
-    const {movies} = this.props;
+    const {movies, activeGenre} = this.props;
 
     return (
       <div className="catalog__movies-list">
-        {movies.map((movie) => this._getMovie(movie))}
+        {!activeGenre && movies.map((movie) => this._getMovie(movie))}
+        {activeGenre &&
+          movies
+            .filter((movie) => movie.genre === GenreMap[activeGenre])
+            .map((movie) => this._getMovie(movie))}
       </div>
     );
   }
@@ -55,19 +59,18 @@ MoviesList.propTypes = {
     name: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired
   })),
-  setMovies: PropTypes.func.isRequired
+  setMovies: PropTypes.func.isRequired,
+  activeGenre: PropTypes.string
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   activeGenre: state.activeGenre,
-  movies: state.sortedMovies
+  movies: state.movies
 });
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    setMovies: () => dispatch(ActionCreator.setMovies())
-  }
-);
+const mapDispatchToProps = (dispatch) => ({
+  setMovies: () => dispatch(ActionCreator.setMovies())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviesList);
 

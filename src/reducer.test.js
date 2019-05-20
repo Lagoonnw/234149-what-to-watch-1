@@ -21,7 +21,6 @@ const filmsMock = [
 const initialStateMock = {
   activeGenre: null,
   movies: [],
-  sortedMovies: [],
   genres
 };
 
@@ -34,7 +33,6 @@ describe(`Reducer works correctly`, () => {
     expect(reducer(initialStateMock, action)).toEqual({
       activeGenre: null,
       movies: filmsMock,
-      sortedMovies: filmsMock,
       genres: initialStateMock.genres
     });
   });
@@ -44,33 +42,29 @@ describe(`Reducer works correctly`, () => {
       genres,
       activeGenre: null,
       movies: filmsMock,
-      sortedMovies: filmsMock
     };
     const action = {
       type: `SORT_MOVIES`,
       payload: `Horror`
     };
     expect(reducer(state, action)).toEqual({
-      sortedMovies: [filmsMock[1]],
       genres,
       activeGenre: `Horror`,
       movies: filmsMock
     });
   });
 
-  test(`Should reset sortedMovies and active filter`, () => {
+  test(`Should reset active filter`, () => {
     const state = {
       genres,
       activeGenre: `Horror`,
       movies: filmsMock,
-      sortedMovies: [filmsMock[1]]
     };
     const action = {type: `RESET_MOVIES`};
     expect(reducer(state, action)).toEqual({
       genres,
       activeGenre: null,
       movies: filmsMock,
-      sortedMovies: filmsMock
     });
   });
 });
