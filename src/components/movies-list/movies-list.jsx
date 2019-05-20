@@ -42,10 +42,11 @@ export class MoviesList extends PureComponent {
   }
 
   _mouseEnterHandler(activeMovieCard) {
-    setTimeout(() => this.setState({activeMovieCard}), VIDEO_PLAY_DELAY_TIME);
+    this._timerId = setTimeout(() => this.setState({activeMovieCard}), VIDEO_PLAY_DELAY_TIME);
   }
 
   _mouseLeaveHandler() {
+    clearTimeout(this._timerId);
     this.setState({activeMovieCard: null});
   }
 }
