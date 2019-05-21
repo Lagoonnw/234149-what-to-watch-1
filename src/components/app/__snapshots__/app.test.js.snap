@@ -275,6 +275,7 @@ Array [
       >
         <li
           className="catalog__genres-item catalog__genres-item--active"
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -284,7 +285,8 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -294,7 +296,8 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -304,7 +307,8 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -314,7 +318,8 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -324,7 +329,8 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -334,7 +340,8 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -344,7 +351,8 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -354,7 +362,8 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -364,7 +373,8 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -380,7 +390,7 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+          onMouseLeave={[MockFunction]}
         >
           <div
             className="small-movie-card__image"
@@ -390,66 +400,8 @@ Array [
               controls={false}
               height="175px"
               muted={true}
-              poster="img/shutter-island.jpg"
-              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-              width="280px"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Shutter Island
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              autoPlay={false}
-              controls={false}
-              height="175px"
-              muted={true}
-              poster="img/pulp-fiction.jpg"
-              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-              width="280px"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Pulp Fiction
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              autoPlay={false}
-              controls={false}
-              height="175px"
-              muted={true}
-              poster="img/snatch.jpg"
-              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+              poster="pic.jpg"
+              src="video.mp4"
               width="280px"
             />
           </div>
@@ -467,7 +419,7 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+          onMouseLeave={[MockFunction]}
         >
           <div
             className="small-movie-card__image"
@@ -477,8 +429,8 @@ Array [
               controls={false}
               height="175px"
               muted={true}
-              poster="img/bohemian-rhapsody.jpg"
-              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+              poster="pic.jpg"
+              src="video.mp4"
               width="280px"
             />
           </div>
@@ -489,14 +441,14 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Bohemian Rhapsody
+              Pulp Fiction
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+          onMouseLeave={[MockFunction]}
         >
           <div
             className="small-movie-card__image"
@@ -506,8 +458,8 @@ Array [
               controls={false}
               height="175px"
               muted={true}
-              poster="img/aviator.jpg"
-              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+              poster="pic.jpg"
+              src="video.mp4"
               width="280px"
             />
           </div>
@@ -518,7 +470,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Aviator
+              The Witcher
             </a>
           </h3>
         </article>

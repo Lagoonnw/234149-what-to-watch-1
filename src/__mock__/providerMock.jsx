@@ -1,7 +1,8 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import {MoviesList} from './movies-list';
-import {createNodeMock} from '../../__mock__/createMockNode';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {genresList} from '../constants/constants';
+import PropTypes from 'prop-types';
 
 const mock = [
   {
@@ -32,12 +33,16 @@ const mock = [
     onMouseEnter: jest.fn()
   }
 ];
+const initialStateMock = {
+  activeGenre: null,
+  movies: mock,
+  genres: Array.from(genresList)
+};
+const reducer = (state = initialStateMock) => state;
+const store = createStore(reducer);
 
-describe(`MoviesList render`, () => {
-  test(`Should render MoviesList correctly`, () => {
-    const options = {createNodeMock};
-    const setMovies = jest.fn();
-    const tree = renderer.create(<MoviesList movies={mock} setMovies={setMovies}/>, options).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-});
+export const ProviderMock = ({children}) => <Provider store={store}>{children}</Provider>;
+
+ProviderMock.propTypes = {
+  children: PropTypes.object
+};
