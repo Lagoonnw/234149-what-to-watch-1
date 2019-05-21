@@ -28,6 +28,7 @@ export class MoviesList extends PureComponent {
   }
 
   _getMovie(movie) {
+    const {onClick} = this.props;
     const isPlaying = movie.id === this.state.activeMovieCard;
 
     return (
@@ -36,6 +37,7 @@ export class MoviesList extends PureComponent {
         isPlaying={isPlaying}
         onMouseLeave={this._mouseLeaveHandler}
         onMouseEnter={this._mouseEnterHandler}
+        onClick={onClick}
         {...movie}
       />
     );
@@ -57,7 +59,8 @@ MoviesList.propTypes = {
     name: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired
   })),
-  setMovies: PropTypes.func.isRequired
+  setMovies: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
