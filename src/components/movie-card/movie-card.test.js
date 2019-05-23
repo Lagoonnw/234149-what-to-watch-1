@@ -13,7 +13,8 @@ describe(`MovieCard render`, () => {
       poster: `pic.jpg`,
       src: `video.mp4`,
       onMouseEnter: jest.fn(),
-      onMouseLeave: jest.fn()
+      onMouseLeave: jest.fn(),
+      onClick: jest.fn(),
     };
     const tree = renderer.create(<MovieCard {...mock}/>, options).toJSON();
     expect(tree).toMatchSnapshot();

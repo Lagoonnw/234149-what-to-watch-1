@@ -1,6 +1,4 @@
-import React, {PureComponent}  from 'react';
-import PropTypes               from 'prop-types';
-import {VIDEO_PLAY_DELAY_TIME} from "../../constants/constants";
+import React, {PureComponent} from 'react';
 
 export const withActiveItem = (Component) => {
   class WithActiveItem extends PureComponent {
@@ -28,8 +26,8 @@ export const withActiveItem = (Component) => {
       this.setState({activeItem});
     }
 
-    _mouseEnterHandler(activeItem) {
-      this._timerId = setTimeout(() => this.setState({activeItem}), VIDEO_PLAY_DELAY_TIME);
+    _mouseEnterHandler(activeItem, timeout) {
+      this._timerId = setTimeout(() => this.setState({activeItem}), timeout);
     }
 
     _mouseLeaveHandler() {

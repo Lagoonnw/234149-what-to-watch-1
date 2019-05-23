@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {MovieCard} from '../movie-card/movie-card.jsx';
-import {GenreMap} from '../../constants/constants';
+import {GenreMap, VIDEO_PLAY_DELAY_TIME} from '../../constants/constants';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../action';
 import {filterMovies} from '../../helpers/filterMovies';
@@ -25,7 +25,7 @@ export class MoviesList extends PureComponent {
   _getMovie(movie) {
     const {onClick, activeItem, onMouseEnter, onMouseLeave} = this.props;
     const isPlaying = movie.id === activeItem;
-    const _onMouseEnter = () => onMouseEnter(movie.id);
+    const _onMouseEnter = () => onMouseEnter(movie.id, VIDEO_PLAY_DELAY_TIME);
 
     return (
       <MovieCard

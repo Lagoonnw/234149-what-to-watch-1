@@ -407,10 +407,10 @@ Array [
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
             >
               Snatch
             </a>
@@ -436,10 +436,10 @@ Array [
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
             >
               Pulp Fiction
             </a>
@@ -465,10 +465,10 @@ Array [
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
             >
               The Witcher
             </a>

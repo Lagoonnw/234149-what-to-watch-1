@@ -10,6 +10,7 @@ describe(`Movies filter render`, ()=> {
           genresList={Array.from(genresList)}
           sortMovies={() => jest.fn()}
           resetMovies={() => jest.fn()}
+          onClick={() => jest.fn()}
         />
     ).toJSON();
     expect(tree).toMatchSnapshot();

@@ -5,7 +5,7 @@ exports[`Movies filter render Should render movies filter correctly 1`] = `
   className="catalog__genres-list"
 >
   <li
-    className="catalog__genres-item "
+    className="catalog__genres-item catalog__genres-item--active"
     onClick={[Function]}
   >
     <a

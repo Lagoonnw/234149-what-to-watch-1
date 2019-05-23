@@ -11,7 +11,7 @@ export const MoviesFilter = (props) => {
     onClick(null);
     resetMovies();
   };
-  console.log('', activeItem);
+
   return (
     <ul className="catalog__genres-list">
       <li
