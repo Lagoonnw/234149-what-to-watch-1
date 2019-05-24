@@ -10,11 +10,6 @@ export class MoviesList extends PureComponent {
   constructor(props) {
     super(props);
     props.setMovies();
-    this.state = {
-      activeMovieCard: null
-    };
-    this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
-    this._mouseLeaveHandler = this._mouseLeaveHandler.bind(this);
   }
 
   render() {
@@ -28,26 +23,20 @@ export class MoviesList extends PureComponent {
   }
 
   _getMovie(movie) {
-    const isPlaying = movie.id === this.state.activeMovieCard;
+    const {onClick, activeItem, onMouseEnter, onMouseLeave} = this.props;
+    const isPlaying = movie.id === activeItem;
+    const _onMouseEnter = () => onMouseEnter(movie.id, VIDEO_PLAY_DELAY_TIME);
 
     return (
       <MovieCard
         key={movie.id}
         isPlaying={isPlaying}
-        onMouseLeave={this._mouseLeaveHandler}
-        onMouseEnter={this._mouseEnterHandler}
+        onMouseLeave={onMouseLeave}
+        onMouseEnter={_onMouseEnter}
+        onClick={onClick}
         {...movie}
       />
     );
-  }
-
-  _mouseEnterHandler(activeMovieCard) {
-    this._timerId = setTimeout(() => this.setState({activeMovieCard}), VIDEO_PLAY_DELAY_TIME);
-  }
-
-  _mouseLeaveHandler() {
-    clearTimeout(this._timerId);
-    this.setState({activeMovieCard: null});
   }
 }
 
@@ -57,7 +46,15 @@ MoviesList.propTypes = {
     name: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired
   })),
-  setMovies: PropTypes.func.isRequired
+  setMovies: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  activeItem: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
+};
+
+MoviesList.defaultProps = {
+  activeItem: null
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
