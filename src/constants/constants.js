@@ -1,4 +1,5 @@
 export const VIDEO_PLAY_DELAY_TIME = 1000;
+export const API_BASE_URL = `https://es31-server.appspot.com/wtw`;
 
 export const genresList = new Set([
   `Comedies`,
