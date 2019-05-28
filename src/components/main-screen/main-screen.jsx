@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {Header} from '../header/header.jsx';
+import Header from '../header/header.jsx';
 import MoviesList from '../movies-list/movies-list.jsx';
 import MoviesFilter from '../movies-filter/movies-filter.jsx';
 import {withActiveItem} from '../../hocs/with-active-item/with-active-item.jsx';

@@ -11,7 +11,8 @@ describe(`MovieCard mouse events test`, () => {
       poster: `pic.jpg`,
       src: `video.mp4`,
       onMouseEnter: jest.fn(),
-      onMouseLeave: jest.fn()
+      onMouseLeave: jest.fn(),
+      onClick: jest.fn()
     };
     const component = shallow(<MovieCard {...movieMock}/>);
     const card = component.find(`.small-movie-card`);
@@ -28,7 +29,8 @@ describe(`MovieCard mouse events test`, () => {
       poster: `pic.jpg`,
       src: `video.mp4`,
       onMouseEnter: jest.fn(),
-      onMouseLeave: jest.fn()
+      onMouseLeave: jest.fn(),
+      onClick: jest.fn()
     };
     const component = shallow(<MovieCard {...movieMock}/>);
     const card = component.find(`.small-movie-card`);

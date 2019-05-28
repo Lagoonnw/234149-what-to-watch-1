@@ -1,51 +1,56 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {MovieCard} from '../movie-card/movie-card.jsx';
-import {GenreMap, VIDEO_PLAY_DELAY_TIME} from '../../constants/constants';
+import {VIDEO_PLAY_DELAY_TIME} from '../../constants/constants';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../action';
-import {filterMovies} from '../../helpers/filterMovies';
+import {ActionCreator} from '../../actions/data/action';
+import {getFilteredMovies} from '../../reducers/data/selectors';
 
-export class MoviesList extends PureComponent {
-  constructor(props) {
-    super(props);
-    props.setMovies();
-  }
+export const MoviesList = (props) => {
+  const {
+    movies,
+    onClick,
+    activeItem,
+    onMouseEnter,
+    onMouseLeave
+  } = props;
 
-  render() {
-    const {movies} = this.props;
-
-    return (
-      <div className="catalog__movies-list">
-        {movies.map((movie) => this._getMovie(movie))}
-      </div>
-    );
-  }
-
-  _getMovie(movie) {
-    const {onClick, activeItem, onMouseEnter, onMouseLeave} = this.props;
+  const _getMovie = (movie) => {
+    const {
+      previewImage,
+      previewVideoLink,
+      genre,
+      id,
+      name
+    } = movie;
     const isPlaying = movie.id === activeItem;
     const _onMouseEnter = () => onMouseEnter(movie.id, VIDEO_PLAY_DELAY_TIME);
 
     return (
       <MovieCard
         key={movie.id}
+        id={id}
+        name={name}
         isPlaying={isPlaying}
         onMouseLeave={onMouseLeave}
         onMouseEnter={_onMouseEnter}
         onClick={onClick}
-        {...movie}
+        poster={previewImage}
+        src={previewVideoLink}
+        genre={genre}
       />
     );
-  }
-}
+  };
+
+  return (
+    <div className="catalog__movies-list">
+      {movies.map((movie) => _getMovie(movie))}
+    </div>
+  );
+};
 
 MoviesList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired
-  })),
+  movies: PropTypes.array.isRequired,
   setMovies: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
@@ -58,7 +63,7 @@ MoviesList.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  movies: filterMovies(state.movies, GenreMap[state.activeGenre])
+  movies: getFilteredMovies(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {API_BASE_URL} from "./constants/constants";
+import {API_BASE_URL} from './constants/constants';
+import {ActionCreator} from './actions/user/action';
 
 export const createAPI = (dispatch) => {
   const api = axios.create({
@@ -7,6 +8,17 @@ export const createAPI = (dispatch) => {
     timeout: 1000 * 5,
     withCredentials: true,
   });
+
+  const onSuccess = (response) => response;
+
+  const onFail = (err) => {
+    if (err.response.status === 403) {
+      dispatch(ActionCreator.setAuthStatus(false));
+    }
+    return err;
+  };
+
+  api.interceptors.response.use(onSuccess, onFail);
 
   return api;
 };

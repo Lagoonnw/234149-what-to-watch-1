@@ -8,22 +8,22 @@ const mock = [
     id: 54545454,
     name: `Snatch`,
     genre: `horror`,
-    poster: `pic.jpg`,
-    src: `video.mp4`,
+    previewImage: `pic.jpg`,
+    previewVideoLink: `video.mp4`,
   },
   {
     id: 9898988,
     name: `Pulp Fiction`,
     genre: `horror`,
-    poster: `pic.jpg`,
-    src: `video.mp4`,
+    previewImage: `pic.jpg`,
+    previewVideoLink: `video.mp4`,
   },
   {
     id: 545468787,
     name: `The Witcher`,
     genre: `horror`,
-    poster: `pic.jpg`,
-    src: `video.mp4`,
+    previewImage: `pic.jpg`,
+    previewVideoLink: `video.mp4`,
   }
 ];
 

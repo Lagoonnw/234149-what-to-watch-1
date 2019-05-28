@@ -44,7 +44,7 @@ VideoPlayer.defaultProps = {
   muted: false,
   autoPlay: false,
   width: DefaultVideoSize.WIDTH,
-  height: DefaultVideoSize.HEIGTH,
+  height: DefaultVideoSize.HEIGHT,
   controls: false
 };
 

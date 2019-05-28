@@ -14,19 +14,24 @@ export const genresList = new Set([
 ]);
 
 export const GenreMap = {
-  Comedies: `comedy`,
-  Crime: `crime`,
-  Documentary: `documentary`,
-  Dramas: `drama`,
-  Horror: `horror`,
-  Romance: `romance`,
-  Thrillers: `thriller`,
-  [`Sci-Fi`]: `sci-fi`,
-  [`Kids & Family`]: `family`
+  Comedies: `Comedy`,
+  Crime: `Crime`,
+  Documentary: `Documentary`,
+  Dramas: `Drama`,
+  Horror: `Horror`,
+  Romance: `Romance`,
+  Thrillers: `Thriller`,
+  [`Sci-Fi`]: `Sci-fi`,
+  [`Kids & Family`]: `Family`
 };
 
 export const DefaultVideoSize = {
   WIDTH: 280,
-  HEIGTH: 175
+  HEIGHT: 175
 };
+
+export const APIEndpoints = {
+  FILMS: `/films`
+};
+
 
