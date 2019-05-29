@@ -1,7 +1,7 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {getAuthState} from '../../reducers/user/selectors';
-import PropTypes from 'prop-types';
+import React           from 'react';
+import {connect}       from 'react-redux';
+import {getAuthStatus} from '../../reducers/user/selectors';
+import PropTypes       from 'prop-types';
 
 export const Header = ({isAuthorizationRequired = true}) => {
   return (
@@ -29,7 +29,7 @@ Header.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  isAuthorizationRequired: getAuthState(state)
+  isAuthorizationRequired: getAuthStatus(state)
 });
 
 export default connect(mapStateToProps, null)(Header);

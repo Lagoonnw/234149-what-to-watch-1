@@ -1,7 +1,7 @@
 import {ActionType} from '../../actions/user/action';
 
 const initialState = {
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
   favorites: []
 };
 
@@ -10,7 +10,6 @@ export const reducer = (state = initialState, action) => {
     case ActionType.SET_AUTH_STATUS: return Object.assign({}, state, {
       isAuthorizationRequired: action.payload
     });
-
   }
 
   return state;

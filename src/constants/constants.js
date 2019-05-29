@@ -31,7 +31,8 @@ export const DefaultVideoSize = {
 };
 
 export const APIEndpoints = {
-  FILMS: `/films`
+  FILMS: `/films`,
+  LOGIN: `/login`
 };
 
 

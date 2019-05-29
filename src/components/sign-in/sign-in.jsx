@@ -1,7 +1,8 @@
 import React, {Fragment} from 'react';
 // import PropTypes from 'prop-types';
 
-export const SignIn = () => {
+export const SignIn = ({onSubmit, onChange, onBlur}) => {
+
   return (
     <Fragment>
       <div className="user-page">
@@ -18,16 +19,16 @@ export const SignIn = () => {
         </header>
 
         <div className="sign-in user-page__content">
-          <form action="#" className="sign-in__form">
+          <form action="#" className="sign-in__form" onSubmit={onSubmit}>
             <div className="sign-in__fields">
               <div className="sign-in__field">
-                <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                  id="user-email"/>
+                <input className="sign-in__input" type="email" placeholder="Email address" name="email"
+                  id="user-email" onChange={onChange} onBlur={onBlur}/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
               <div className="sign-in__field">
-                <input className="sign-in__input" type="password" placeholder="Password" name="user-password"
-                  id="user-password"/>
+                <input className="sign-in__input" type="password" placeholder="Password" name="password"
+                  id="user-password" onChange={onChange} onBlur={onBlur}/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
             </div>

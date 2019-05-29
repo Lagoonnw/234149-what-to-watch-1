@@ -1,3 +1,3 @@
 import {NameSpaces} from '../name-spaces';
 
-export const getAuthState = (state) => state[NameSpaces.USER].isAuthorizationRequired;
+export const getAuthStatus = (state) => state[NameSpaces.USER].isAuthorizationRequired;
