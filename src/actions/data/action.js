@@ -1,6 +1,6 @@
-import {APIEndpoints} from '../../constants/constants';
-import {createAction} from '../../helpers/create-action/create-action';
-import {objectKeysConverter} from '../../helpers/convert-object-keys-to-camel-case/convert-object-keys-to-camel-case';
+import {APIEndpoints}             from '../../constants/constants';
+import {createAction}             from '../../helpers/create-action/create-action';
+import {convertObjectKeysToCamel} from '../../helpers/convert-object-keys-to-camel-case/convert-object-keys-to-camel-case';
 
 export const ActionType = {
   SORT_MOVIES: `SORT_MOVIES`,
@@ -12,7 +12,7 @@ export const Operation = {
   loadMovies: () => (dispatch, _getState, api) => {
     return api.get(APIEndpoints.FILMS)
       .then((response) => {
-        dispatch(ActionCreator.setMovies(response.data.map((movie) => objectKeysConverter(movie))));
+        dispatch(ActionCreator.setMovies(response.data.map((movie) => convertObjectKeysToCamel(movie))));
       });
   }
 };

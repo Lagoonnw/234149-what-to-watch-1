@@ -1,4 +1,4 @@
-export const objectKeysConverter = (obj) => {
+export const convertObjectKeysToCamel = (obj) => {
   if (typeof obj !== `object`) {
     throw Error(`Should be object type`);
   }
