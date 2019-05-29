@@ -1,9 +1,9 @@
-import React          from 'react';
-import {connect}      from 'react-redux';
-import {getAuthState} from "../../reducers/user/selectors";
+import React from 'react';
+import {connect} from 'react-redux';
+import {getAuthState} from '../../reducers/user/selectors';
 import PropTypes from 'prop-types';
 
-export const Header = ({isAuthorized = false}) => {
+export const Header = ({isAuthorizationRequired = true}) => {
   return (
     <header className="page-header movie-card__head">
       <div className="logo">
@@ -15,21 +15,21 @@ export const Header = ({isAuthorized = false}) => {
       </div>
 
       <div className="user-block">
-        {isAuthorized && <div className="user-block__avatar">
+        {isAuthorizationRequired && <div className="user-block__avatar">
           <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
         </div>}
-        {!isAuthorized && <a href="sign-in.html" className="user-block__link">Sign in</a>}
+        {!isAuthorizationRequired && <a href="sign-in.html" className="user-block__link">Sign in</a>}
       </div>
     </header>
   );
 };
 
 Header.propTypes = {
-  isAuthorized: PropTypes.bool
+  isAuthorizationRequired: PropTypes.bool
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  isAuthorized: getAuthState(state)
+  isAuthorizationRequired: getAuthState(state)
 });
 
 export default connect(mapStateToProps, null)(Header);

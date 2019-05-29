@@ -1,12 +1,18 @@
 import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
 import MoviesList from '../movies-list/movies-list.jsx';
 import MoviesFilter from '../movies-filter/movies-filter.jsx';
 import {withActiveItem} from '../../hocs/with-active-item/with-active-item.jsx';
+import {SignIn} from '../sign-in/sign-in.jsx';
 
 const MoviesListWithActiveItem = withActiveItem(MoviesList);
 const MoviesFilterWithActiveItem = withActiveItem(MoviesFilter);
-export const MainScreen = () => {
+export const MainScreen = ({isAuthorizationRequired = false}) => {
+  if (isAuthorizationRequired) {
+    return <SignIn/>;
+  }
+
   return (
     <Fragment>
       <div className="visually-hidden">
@@ -111,3 +117,6 @@ export const MainScreen = () => {
   );
 };
 
+MainScreen.propTypes = {
+  isAuthorizationRequired: PropTypes.bool
+};
