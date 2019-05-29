@@ -1,5 +1,5 @@
 import {filterMovies} from './filter-movies';
-import {films}        from '../../__mock__/films';
+import {films} from '../../__mock__/films';
 
 describe(`Filter movies helper test`, () => {
   test(`Should return same array if filter is null or undefined`, () => {

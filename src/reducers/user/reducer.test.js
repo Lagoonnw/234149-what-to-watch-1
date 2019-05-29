@@ -1,5 +1,5 @@
 import {reducer} from './reducer';
-import {ActionType} from "../../actions/user/action";
+import {ActionType} from '../../actions/user/action';
 
 const initialStateMock = {
   isAuthorized: false

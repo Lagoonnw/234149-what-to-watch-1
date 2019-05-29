@@ -1,7 +1,7 @@
-import MockAdapter    from 'axios-mock-adapter';
-import {createAPI}    from '../../api';
-import {operation}    from './action';
-import {ActionType}   from './action';
+import MockAdapter from 'axios-mock-adapter';
+import {createAPI} from '../../api';
+import {operation} from './action';
+import {actionType} from './action';
 import {APIEndpoints} from '../../constants/constants';
 
 describe(`Operation works correctlly`, ()=> {
@@ -19,7 +19,7 @@ describe(`Operation works correctlly`, ()=> {
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.SET_MOVIES,
+          type: actionType.SET_MOVIES,
           payload: [{fake: true}],
         });
       });
