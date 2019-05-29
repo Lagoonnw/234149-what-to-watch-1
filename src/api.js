@@ -1,5 +1,5 @@
-import axios           from 'axios';
-import {API_BASE_URL}  from './constants/constants';
+import axios from 'axios';
+import {API_BASE_URL} from './constants/constants';
 import {actionCreator} from './actions/user/action';
 
 export const createAPI = (dispatch) => {

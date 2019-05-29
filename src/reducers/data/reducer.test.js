@@ -1,6 +1,6 @@
 import {genresList} from '../../constants/constants';
 import {reducer} from './reducer';
-import {ActionType} from '../../actions/data/action';
+import {actionType} from '../../actions/data/action';
 
 const genres = Array.from(genresList);
 const filmsMock = [
@@ -28,7 +28,7 @@ const initialStateMock = {
 describe(`Data reducer works correctly`, () => {
   test(`Should set movies and sorted movies`, () => {
     const action = {
-      type: ActionType.SET_MOVIES,
+      type: actionType.SET_MOVIES,
       payload: filmsMock
     };
     expect(reducer(initialStateMock, action)).toEqual({
@@ -45,7 +45,7 @@ describe(`Data reducer works correctly`, () => {
       movies: filmsMock,
     };
     const action = {
-      type: ActionType.SORT_MOVIES,
+      type: actionType.SORT_MOVIES,
       payload: `Horror`
     };
     expect(reducer(state, action)).toEqual({
@@ -61,7 +61,7 @@ describe(`Data reducer works correctly`, () => {
       activeGenre: `Horror`,
       movies: filmsMock,
     };
-    const action = {type: ActionType.RESET_MOVIES};
+    const action = {type: actionType.RESET_MOVIES};
     expect(reducer(state, action)).toEqual({
       genres,
       activeGenre: null,
