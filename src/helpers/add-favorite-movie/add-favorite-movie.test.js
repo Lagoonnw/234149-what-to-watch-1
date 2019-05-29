@@ -1,5 +1,5 @@
 import {addFavoriteMovie} from './add-favorite-movie';
-import {films}            from '../../__mock__/films';
+import {films} from '../../__mock__/films';
 
 const mockItem = {
   id: 44,

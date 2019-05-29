@@ -1,6 +1,6 @@
 import {genresList} from '../../constants/constants';
 import {reducer} from './reducer';
-import {actionType} from '../../actions/data/action';
+import {actionType} from '../../actions/movies/action';
 
 const genres = Array.from(genresList);
 const filmsMock = [

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {API_BASE_URL} from './constants/constants';
-import {actionCreator} from './actions/user/action';
+import {userAction} from './actions/user/action';
 
 export const createAPI = (dispatch) => {
   const api = axios.create({
@@ -13,7 +13,7 @@ export const createAPI = (dispatch) => {
 
   const onFail = (err) => {
     if (err.response.status === 403) {
-      dispatch(actionCreator.setAuthStatus(false));
+      dispatch(userAction.setAuthStatus(false));
     }
     return err;
   };

@@ -1,6 +1,6 @@
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../../api';
-import {operation} from './action';
+import {moviesAction} from './action';
 import {actionType} from './action';
 import {APIEndpoints} from '../../constants/constants';
 
@@ -9,7 +9,7 @@ describe(`Operation works correctlly`, ()=> {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);
     const apiMock = new MockAdapter(api);
-    const moviesLoader = operation.loadMovies();
+    const moviesLoader = moviesAction.loadMovies();
 
     apiMock
       .onGet(APIEndpoints.FILMS)
