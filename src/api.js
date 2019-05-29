@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {API_BASE_URL} from './constants/constants';
 import {userAction} from './actions/user/action';
+import {ResponseStatus} from "./constants/constants";
 
 export const createAPI = (dispatch) => {
   const api = axios.create({
@@ -12,7 +13,7 @@ export const createAPI = (dispatch) => {
   const onSuccess = (response) => response;
 
   const onFail = (err) => {
-    if (err.response.status === 403) {
+    if (err.response.status === ResponseStatus.FORBIDDEN) {
       dispatch(userAction.setAuthStatus(false));
     }
     return err;

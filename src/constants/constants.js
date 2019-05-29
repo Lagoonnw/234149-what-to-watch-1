@@ -34,4 +34,10 @@ export const APIEndpoints = {
   FILMS: `/films`
 };
 
+export const ResponseStatus = {
+  OK: 200,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404
+};
+
 
