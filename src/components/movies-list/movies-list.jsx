@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {MovieCard} from '../movie-card/movie-card.jsx';
+import React                   from 'react';
+import PropTypes               from 'prop-types';
+import {MovieCard}             from '../movie-card/movie-card.jsx';
 import {VIDEO_PLAY_DELAY_TIME} from '../../constants/constants';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../actions/data/action';
-import {getFilteredMovies} from '../../reducers/data/selectors';
+import {connect}               from 'react-redux';
+import {actionCreator}         from '../../actions/data/action';
+import {getFilteredMovies}     from '../../reducers/data/selectors';
 
 export const MoviesList = (props) => {
   const {
@@ -67,7 +67,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setMovies: () => dispatch(ActionCreator.setMovies())
+  setMovies: () => dispatch(actionCreator.setMovies())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviesList);

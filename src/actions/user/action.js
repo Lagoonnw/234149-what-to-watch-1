@@ -4,6 +4,6 @@ export const ActionType = {
   SET_AUTH_STATUS: `SET_AUTH_STATUS`,
 };
 
-export const ActionCreator = {
+export const actionCreator = {
   setAuthStatus: (status) => createAction(ActionType.SET_AUTH_STATUS, status),
 };
