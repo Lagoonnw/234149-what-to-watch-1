@@ -1,11 +1,11 @@
 import React, {Fragment} from 'react';
-import {Header} from '../header/header.jsx';
+import Header from '../header/header.jsx';
 import MoviesList from '../movies-list/movies-list.jsx';
 import MoviesFilter from '../movies-filter/movies-filter.jsx';
 import {withActiveItem} from '../../hocs/with-active-item/with-active-item.jsx';
 
-const MoviesListWrapped = withActiveItem(MoviesList);
-const MoviesFilterWrapped = withActiveItem(MoviesFilter);
+const MoviesListWithActiveItem = withActiveItem(MoviesList);
+const MoviesFilterWithActiveItem = withActiveItem(MoviesFilter);
 export const MainScreen = () => {
   return (
     <Fragment>
@@ -86,8 +86,8 @@ export const MainScreen = () => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <MoviesFilterWrapped />
-          <MoviesListWrapped />
+          <MoviesFilterWithActiveItem />
+          <MoviesListWithActiveItem />
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>

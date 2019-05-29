@@ -9,8 +9,8 @@ const mock = [
     id: 54545454,
     name: `Snatch`,
     genre: `horror`,
-    poster: `pic.jpg`,
-    src: `video.mp4`,
+    previewImage: `pic.jpg`,
+    previewVideoLink: `video.mp4`,
     onMouseLeave: jest.fn(),
     onMouseEnter: jest.fn()
   },
@@ -18,8 +18,8 @@ const mock = [
     id: 9898988,
     name: `Pulp Fiction`,
     genre: `horror`,
-    poster: `pic.jpg`,
-    src: `video.mp4`,
+    previewImage: `pic.jpg`,
+    previewVideoLink: `video.mp4`,
     onMouseLeave: jest.fn(),
     onMouseEnter: jest.fn()
   },
@@ -27,16 +27,21 @@ const mock = [
     id: 545468787,
     name: `The Witcher`,
     genre: `horror`,
-    poster: `pic.jpg`,
-    src: `video.mp4`,
+    previewImage: `pic.jpg`,
+    previewVideoLink: `video.mp4`,
     onMouseLeave: jest.fn(),
     onMouseEnter: jest.fn()
   }
 ];
 const initialStateMock = {
-  activeGenre: null,
-  movies: mock,
-  genres: Array.from(genresList)
+  movies: {
+    activeGenre: null,
+    movies: mock,
+    genres: Array.from(genresList)
+  },
+  user: {
+    isAuthorized: false
+  }
 };
 const reducer = (state = initialStateMock) => state;
 const store = createStore(reducer);

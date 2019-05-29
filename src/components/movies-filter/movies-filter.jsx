@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {ActionCreator} from '../../action';
+import {moviesAction} from '../../actions/movies/action';
 import {genresList as genres} from '../../constants/constants';
+import {getGenres} from '../../reducers/movies/selectors';
 
 export const MoviesFilter = (props) => {
   const {genresList, sortMovies, resetMovies, onClick, activeItem = null} = props;
@@ -51,12 +52,12 @@ MoviesFilter.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  genresList: state.genres
+  genresList: getGenres(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  sortMovies: (activeFilter) => dispatch(ActionCreator.sortMovies(activeFilter)),
-  resetMovies: () => dispatch(ActionCreator.resetMovies())
+  sortMovies: (activeFilter) => dispatch(moviesAction.sortMovies(activeFilter)),
+  resetMovies: () => dispatch(moviesAction.resetMovies())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviesFilter);

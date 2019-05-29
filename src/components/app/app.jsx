@@ -1,5 +1,4 @@
 import React from 'react';
-import {MainScreen} from "../main-screen/main-screen.jsx";
-import {films} from "../../mocks/films";
+import {MainScreen} from '../main-screen/main-screen.jsx';
 
-export const App = () => <MainScreen moviesList={films}/>;
+export const App = () => <MainScreen />;
