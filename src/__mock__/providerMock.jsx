@@ -34,7 +34,7 @@ const mock = [
   }
 ];
 const initialStateMock = {
-  data: {
+  movies: {
     activeGenre: null,
     movies: mock,
     genres: Array.from(genresList)

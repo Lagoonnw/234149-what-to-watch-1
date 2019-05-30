@@ -1,5 +1,5 @@
 import {genresList} from '../../constants/constants';
-import {actionType} from '../../actions/data/action';
+import {actionType} from '../../actions/movies/action';
 
 const initialState = {
   activeGenre: null,

@@ -35,4 +35,10 @@ export const APIEndpoints = {
   LOGIN: `/login`
 };
 
+export const ResponseStatus = {
+  OK: 200,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404
+};
+
 

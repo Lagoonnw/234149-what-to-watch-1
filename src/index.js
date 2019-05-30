@@ -7,7 +7,7 @@ import {reducer} from './reducers';
 import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 import {createAPI} from './api';
-import {operation} from './actions/data/action';
+import {moviesAction} from './actions/movies/action';
 
 const init = () => {
   const api = createAPI((...args) => store.dispatch(...args));
@@ -18,7 +18,7 @@ const init = () => {
       )
   );
 
-  store.dispatch(operation.loadMovies());
+  store.dispatch(moviesAction.loadMovies());
 
   const rootElement = document.querySelector(`#root`);
   ReactDom.render(
@@ -26,7 +26,6 @@ const init = () => {
         <App/>
       </Provider>,
       rootElement);
-
 };
 
 init();

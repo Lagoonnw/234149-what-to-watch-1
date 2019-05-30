@@ -1,9 +1,9 @@
-import React                  from 'react';
-import PropTypes              from 'prop-types';
-import {connect}              from "react-redux";
-import {actionCreator}        from '../../actions/data/action';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import {moviesAction} from '../../actions/movies/action';
 import {genresList as genres} from '../../constants/constants';
-import {getGenres}            from "../../reducers/data/selectors";
+import {getGenres} from '../../reducers/movies/selectors';
 
 export const MoviesFilter = (props) => {
   const {genresList, sortMovies, resetMovies, onClick, activeItem = null} = props;
@@ -56,8 +56,8 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  sortMovies: (activeFilter) => dispatch(actionCreator.sortMovies(activeFilter)),
-  resetMovies: () => dispatch(actionCreator.resetMovies())
+  sortMovies: (activeFilter) => dispatch(moviesAction.sortMovies(activeFilter)),
+  resetMovies: () => dispatch(moviesAction.resetMovies())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviesFilter);

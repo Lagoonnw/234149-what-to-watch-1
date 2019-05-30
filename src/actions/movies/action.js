@@ -8,17 +8,14 @@ export const actionType = {
   SET_MOVIES: `SET_MOVIES`
 };
 
-export const operation = {
+export const moviesAction = {
+  sortMovies: (activeFiler) => createAction(actionType.SORT_MOVIES, activeFiler),
+  resetMovies: () => createAction(actionType.RESET_MOVIES),
+  setMovies: (films) => createAction(actionType.SET_MOVIES, films),
   loadMovies: () => (dispatch, _getState, api) => {
     return api.get(APIEndpoints.FILMS)
       .then((response) => {
-        dispatch(actionCreator.setMovies(response.data.map((movie) => convertObjectKeysToCamel(movie))));
+        dispatch(moviesAction.setMovies(response.data.map((movie) => convertObjectKeysToCamel(movie))));
       });
   }
-};
-
-export const actionCreator = {
-  sortMovies: (activeFiler) => createAction(actionType.SORT_MOVIES, activeFiler),
-  resetMovies: () => createAction(actionType.RESET_MOVIES),
-  setMovies: (films) => createAction(actionType.SET_MOVIES, films)
 };
