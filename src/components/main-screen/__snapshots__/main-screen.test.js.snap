@@ -169,7 +169,8 @@ Array [
       >
         <a
           className="user-block__link"
-          href="sign-in.html"
+          href="#"
+          onClick={[Function]}
         >
           Sign in
         </a>

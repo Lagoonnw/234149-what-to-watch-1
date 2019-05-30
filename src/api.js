@@ -16,6 +16,9 @@ export const createAPI = (dispatch) => {
     if (err.response.status === ResponseStatus.FORBIDDEN) {
       dispatch(userAction.setAuthStatus(false));
     }
+    if (err.response.status === ResponseStatus.BAD_REQUEST) {
+      dispatch(userAction.setAuthFailed(true));
+    }
     return err;
   };
 

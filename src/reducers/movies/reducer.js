@@ -1,5 +1,5 @@
 import {genresList} from '../../constants/constants';
-import {actionType} from '../../actions/movies/action';
+import {ActionType} from '../../actions/movies/action';
 
 const initialState = {
   activeGenre: null,
@@ -9,15 +9,15 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.SORT_MOVIES:
+    case ActionType.SORT_MOVIES:
       return Object.assign({}, state, {
         activeGenre: action.payload,
       });
-    case actionType.SET_MOVIES:
+    case ActionType.SET_MOVIES:
       return Object.assign({}, state, {
         movies: action.payload,
       });
-    case actionType.RESET_MOVIES:
+    case ActionType.RESET_MOVIES:
       return Object.assign({}, state, {
         activeGenre: null
       });

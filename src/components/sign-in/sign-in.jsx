@@ -1,8 +1,7 @@
 import React, {Fragment} from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-export const SignIn = ({onSubmit, onChange, onBlur}) => {
-
+export const SignIn = ({onSubmit, onChange, fieldValidity, fieldTouched, authFailed = false}) => {
   return (
     <Fragment>
       <div className="user-page">
@@ -20,15 +19,18 @@ export const SignIn = ({onSubmit, onChange, onBlur}) => {
 
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form" onSubmit={onSubmit}>
+            {authFailed && <div className="sign-in__message">
+              <p>We can’t recognize this email <br/> and password combination. Please try again.</p>
+            </div>}
             <div className="sign-in__fields">
-              <div className="sign-in__field">
+              <div className={`sign-in__field ${(!fieldValidity.email && fieldTouched.email) ? `sign-in__field--error` : ``}`}>
                 <input className="sign-in__input" type="email" placeholder="Email address" name="email"
-                  id="user-email" onChange={onChange} onBlur={onBlur}/>
+                  id="user-email" onChange={onChange} />
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
-              <div className="sign-in__field">
+              <div className={`sign-in__field ${(!fieldValidity.password && fieldTouched.password) ? `sign-in__field--error` : ``}`}>
                 <input className="sign-in__input" type="password" placeholder="Password" name="password"
-                  id="user-password" onChange={onChange} onBlur={onBlur}/>
+                  id="user-password" onChange={onChange} />
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
             </div>
@@ -54,4 +56,12 @@ export const SignIn = ({onSubmit, onChange, onBlur}) => {
       </div>
     </Fragment>
   );
+};
+
+SignIn.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  fieldValidity: PropTypes.object.isRequired,
+  fieldTouched: PropTypes.object.isRequired,
+  authFailed: PropTypes.bool
 };
