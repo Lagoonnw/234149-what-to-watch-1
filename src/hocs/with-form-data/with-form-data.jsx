@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import {validator} from '../../helpers/validators/validators';
-import {FormFieldName} from '../../constants/constants';
 import PropTypes from 'prop-types';
 import {makeObjectWithKeysFromArray} from '../../helpers/make-object-keys-from-array/make-object-keys-from-array';
 
@@ -47,18 +46,17 @@ export const withFormData = (Component) => {
     }
 
     _changeHandler(e) {
-      const inputName = e.target.name;
-      const inputValue = e.target.value;
+      const {name, value} = e.target;
 
-      this._setFieldTouched(inputName);
-      this._validateField(inputValue, inputName);
-      this.setState({[inputName]: inputValue});
+      this._setFieldTouched(name);
+      this._validateField(value, name);
+      this.setState({[name]: value});
     }
 
     _validateField(inputValue, inputName) {
       const fieldValidity = Object.assign({}, this.state.fieldValidity, {
         [inputName]: validator.required(inputValue) &&
-                     (inputName === FormFieldName.EMAIL ? validator.email(inputValue) : true)
+                     (inputName === `email` ? validator.email(inputValue) : true)
       });
       this.setState({fieldValidity});
     }

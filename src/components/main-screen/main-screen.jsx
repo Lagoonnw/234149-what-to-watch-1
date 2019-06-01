@@ -18,12 +18,8 @@ const MoviesFilterWithActiveItem = withActiveItem(MoviesFilter);
 const SignInWithFormData = withFormData(SignIn);
 
 export const MainScreen = ({isAuthorizationRequired = false, login, authFailed}) => {
-  if (isAuthorizationRequired) {
-    return <SignInWithFormData login={login} authFailed={authFailed}/>;
-  }
-
-  return (
-    <Fragment>
+  return (isAuthorizationRequired) ? <SignInWithFormData login={login} authFailed={authFailed}/> :
+    (<Fragment>
       <div className="visually-hidden">
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <symbol id="add" viewBox="0 0 19 20">
@@ -121,8 +117,7 @@ export const MainScreen = ({isAuthorizationRequired = false, login, authFailed})
           </div>
         </footer>
       </div>
-    </Fragment>
-  );
+    </Fragment>);
 };
 
 MainScreen.propTypes = {

@@ -7,8 +7,8 @@ import {BASE_URL} from '../../constants/constants';
 
 export const Header = (props) => {
   const {
-    shouldShowAvatar = false,
-    isAuthorizationRequired = false,
+    shouldShowAvatar,
+    isAuthorizationRequired,
     onClick,
     userPic,
   } = props;
@@ -43,6 +43,11 @@ Header.propTypes = {
   onClick: PropTypes.func.isRequired,
   userPic: PropTypes.string,
   isAuthorizationRequired: PropTypes.bool
+};
+
+Header.defaultProps = {
+  shouldShowAvatar: false,
+  isAuthorizationRequired: false
 };
 
 const mapStateToProps = (state, ownProps) => {

@@ -43,9 +43,4 @@ export const ResponseStatus = {
   BAD_REQUEST: 400
 };
 
-export const FormFieldName = {
-  EMAIL: `email`,
-  PASSWORD: `password`
-};
-
 
