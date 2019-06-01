@@ -1,14 +1,25 @@
 import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
 import MoviesList from '../movies-list/movies-list.jsx';
 import MoviesFilter from '../movies-filter/movies-filter.jsx';
 import {withActiveItem} from '../../hocs/with-active-item/with-active-item.jsx';
+import {SignIn} from '../sign-in/sign-in.jsx';
+import {connect} from 'react-redux';
+import {
+  getAuthStatus,
+  getAuthFailedStatus
+} from '../../reducers/user/selectors';
+import {withFormData} from '../../hocs/with-form-data/with-form-data.jsx';
+import {userAction} from '../../actions/user/action';
 
 const MoviesListWithActiveItem = withActiveItem(MoviesList);
 const MoviesFilterWithActiveItem = withActiveItem(MoviesFilter);
-export const MainScreen = () => {
-  return (
-    <Fragment>
+const SignInWithFormData = withFormData(SignIn);
+
+export const MainScreen = ({isAuthorizationRequired = false, login, authFailed}) => {
+  return (isAuthorizationRequired) ? <SignInWithFormData login={login} authFailed={authFailed}/> :
+    (<Fragment>
       <div className="visually-hidden">
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <symbol id="add" viewBox="0 0 19 20">
@@ -40,7 +51,6 @@ export const MainScreen = () => {
           </symbol>
         </svg>
       </div>
-
       <section className="movie-card">
         <div className="movie-card__bg">
           <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
@@ -48,7 +58,7 @@ export const MainScreen = () => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header/>
+        <Header />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -107,7 +117,22 @@ export const MainScreen = () => {
           </div>
         </footer>
       </div>
-    </Fragment>
-  );
+    </Fragment>);
 };
 
+MainScreen.propTypes = {
+  isAuthorizationRequired: PropTypes.bool,
+  login: PropTypes.func.isRequired,
+  authFailed: PropTypes.bool
+};
+
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  isAuthorizationRequired: getAuthStatus(state),
+  authFailed: getAuthFailedStatus(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (data) => dispatch(userAction.login(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

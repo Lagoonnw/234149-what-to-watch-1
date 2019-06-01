@@ -2,7 +2,7 @@ import {reducer} from './reducer';
 import {ActionType} from '../../actions/user/action';
 
 const initialStateMock = {
-  isAuthorized: false
+  isAuthorizationRequired: false
 };
 
 describe(`User reducer should work correctly`, () => {
@@ -11,13 +11,13 @@ describe(`User reducer should work correctly`, () => {
       type: ActionType.SET_AUTH_STATUS,
       payload: true
     })).toEqual({
-      isAuthorized: true
+      isAuthorizationRequired: true
     });
     expect(reducer(initialStateMock, {
       type: ActionType.SET_AUTH_STATUS,
       payload: false
     })).toEqual({
-      isAuthorized: false
+      isAuthorizationRequired: false
     });
   });
 });

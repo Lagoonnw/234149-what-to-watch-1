@@ -1,5 +1,6 @@
 export const VIDEO_PLAY_DELAY_TIME = 1000;
 export const API_BASE_URL = `https://es31-server.appspot.com/wtw`;
+export const BASE_URL = `https://es31-server.appspot.com`;
 
 export const genresList = new Set([
   `Comedies`,
@@ -31,13 +32,15 @@ export const DefaultVideoSize = {
 };
 
 export const APIEndpoints = {
-  FILMS: `/films`
+  FILMS: `/films`,
+  LOGIN: `/login`
 };
 
 export const ResponseStatus = {
   OK: 200,
   FORBIDDEN: 403,
-  NOT_FOUND: 404
+  NOT_FOUND: 404,
+  BAD_REQUEST: 400
 };
 
 
