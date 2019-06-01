@@ -1,5 +1,13 @@
 export const validator = {
   email: (value) => (value.includes(`@`)),
-  required: (value) => (typeof value === `number`) ? Boolean(String(value)) : Boolean(value)
+  required: (value) => {
+    if (typeof value === `number`) {
+      return Boolean(String(value));
+    }
+    if (!value) {
+      return false;
+    }
+    return Boolean(value);
+  }
 };
 
