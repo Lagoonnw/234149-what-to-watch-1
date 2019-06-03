@@ -1,9 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {MoviesList} from './movies-list';
 import {createNodeMock} from '../../__mock__/createMockNode';
+import {ProviderMock} from '../../__mock__/providerMock';
+import {Favorites} from './favorites';
 
-const mock = [
+const mockFilms = [
   {
     id: 54545454,
     name: `Snatch`,
@@ -27,20 +28,14 @@ const mock = [
   }
 ];
 
-describe(`MoviesList render`, () => {
-  test(`Should render MoviesList correctly`, () => {
+describe(`Favorites component snapshot test`, () => {
+  test(`Should render Favorites correctly`, () => {
     const options = {createNodeMock};
-    const onClick = jest.fn();
-    const onMouseEnter = jest.fn();
-    const onMouseLeave = jest.fn();
     const tree = renderer.create(
-        <MoviesList
-          movies={mock}
-          onClick={onClick}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        />, options
-    ).toJSON();
+        <ProviderMock>
+          <Favorites movies={mockFilms} fetchMovies={jest.fn()}/>
+        </ProviderMock>
+        , options);
     expect(tree).toMatchSnapshot();
   });
 });

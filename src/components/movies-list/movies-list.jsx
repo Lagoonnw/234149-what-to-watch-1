@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {MovieCard} from '../movie-card/movie-card.jsx';
 import {VIDEO_PLAY_DELAY_TIME} from '../../constants/constants';
-import {connect} from 'react-redux';
-import {moviesAction} from '../../actions/movies/action';
-import {getFilteredMovies} from '../../reducers/movies/selectors';
 
 export const MoviesList = (props) => {
   const {
@@ -51,7 +48,6 @@ export const MoviesList = (props) => {
 
 MoviesList.propTypes = {
   movies: PropTypes.array.isRequired,
-  setMovies: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
@@ -61,14 +57,3 @@ MoviesList.propTypes = {
 MoviesList.defaultProps = {
   activeItem: null
 };
-
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  movies: getFilteredMovies(state)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setMovies: () => dispatch(moviesAction.setMovies())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesList);
-

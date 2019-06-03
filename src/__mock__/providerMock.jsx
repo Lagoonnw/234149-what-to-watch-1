@@ -3,6 +3,7 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {genresList} from '../constants/constants';
 import PropTypes from 'prop-types';
+import {MemoryRouter} from 'react-router-dom';
 
 const mock = [
   {
@@ -46,7 +47,13 @@ const initialStateMock = {
 const reducer = (state = initialStateMock) => state;
 const store = createStore(reducer);
 
-export const ProviderMock = ({children}) => <Provider store={store}>{children}</Provider>;
+export const ProviderMock = ({children}) => (
+  <Provider store={store}>
+    <MemoryRouter initialEntries={[`/`]}>
+      { children }
+    </MemoryRouter>
+  </Provider>
+);
 
 ProviderMock.propTypes = {
   children: PropTypes.object

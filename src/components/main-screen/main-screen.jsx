@@ -1,13 +1,16 @@
 import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
-import MoviesList from '../movies-list/movies-list.jsx';
+import {MoviesList} from '../movies-list/movies-list.jsx';
 import MoviesFilter from '../movies-filter/movies-filter.jsx';
 import {withActiveItem} from '../../hocs/with-active-item/with-active-item.jsx';
+import {getFilteredMovies} from "../../reducers/movies/selectors";
+import {connect} from "react-redux";
 
 const MoviesListWithActiveItem = withActiveItem(MoviesList);
 const MoviesFilterWithActiveItem = withActiveItem(MoviesFilter);
 
-export const MainScreen = () => {
+export const MainScreen = ({movies}) => {
   return (<Fragment>
     <div className="visually-hidden">
       <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -98,7 +101,7 @@ export const MainScreen = () => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <MoviesFilterWithActiveItem/>
-        <MoviesListWithActiveItem/>
+        <MoviesListWithActiveItem movies={movies}/>
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
         </div>
@@ -120,3 +123,13 @@ export const MainScreen = () => {
     </div>
   </Fragment>);
 };
+
+MainScreen.propTypes = {
+  movies: PropTypes.array.isRequired
+};
+
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  movies: getFilteredMovies(state)
+});
+
+export default connect(mapStateToProps, null)(MainScreen);

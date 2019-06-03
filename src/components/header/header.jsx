@@ -15,16 +15,18 @@ export const Header = (props) => {
   return (
     <header className={`page-header ${className}`}>
       <div className="logo">
-        <a href="main.html" className="logo__link">
+        <Link className="logo__link" to="/">
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
-        </a>
+        </Link>
       </div>
 
       <div className="user-block">
         {shouldShowAvatar && <div className="user-block__avatar">
-          <img src={userPic} alt="User avatar" width="63" height="63"/>
+          <Link to="/favorites">
+            <img src={userPic} alt="User avatar" width="63" height="63"/>
+          </Link>
         </div>}
         {!shouldShowAvatar && <Link className="user-block__link" to="/login">Sign in</Link>}
       </div>

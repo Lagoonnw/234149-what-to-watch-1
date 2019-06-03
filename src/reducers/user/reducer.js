@@ -1,7 +1,7 @@
 import {ActionType} from '../../actions/user/action';
 
 const initialState = {
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
   authFailed: false,
   favorites: [],
   profile: null
@@ -17,6 +17,9 @@ export const reducer = (state = initialState, action) => {
     });
     case ActionType.SET_AUTH_FAILED: return Object.assign({}, state, {
       authFailed: action.payload
+    });
+    case ActionType.SET_FAVORITES: return Object.assign({}, state, {
+      favorites: action.payload
     });
   }
 

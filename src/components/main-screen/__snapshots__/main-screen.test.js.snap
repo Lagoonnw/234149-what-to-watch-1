@@ -138,14 +138,15 @@ Array [
       WTW
     </h1>
     <header
-      className="page-header movie-card__head"
+      className="page-header undefined"
     >
       <div
         className="logo"
       >
         <a
           className="logo__link"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -169,7 +170,7 @@ Array [
       >
         <a
           className="user-block__link"
-          href="#"
+          href="/login"
           onClick={[Function]}
         >
           Sign in
@@ -397,8 +398,6 @@ Array [
               controls={false}
               height="175px"
               muted={true}
-              poster="pic.jpg"
-              src="video.mp4"
               width="280px"
             />
           </div>
@@ -409,7 +408,7 @@ Array [
             <a
               className="small-movie-card__link"
             >
-              Snatch
+              Shutter Island
             </a>
           </h3>
         </article>
@@ -426,8 +425,6 @@ Array [
               controls={false}
               height="175px"
               muted={true}
-              poster="pic.jpg"
-              src="video.mp4"
               width="280px"
             />
           </div>
@@ -455,8 +452,6 @@ Array [
               controls={false}
               height="175px"
               muted={true}
-              poster="pic.jpg"
-              src="video.mp4"
               width="280px"
             />
           </div>
@@ -467,7 +462,61 @@ Array [
             <a
               className="small-movie-card__link"
             >
-              The Witcher
+              Snatch
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              autoPlay={false}
+              controls={false}
+              height="175px"
+              muted={true}
+              width="280px"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+            onClick={[Function]}
+          >
+            <a
+              className="small-movie-card__link"
+            >
+              Bohemian Rhapsody
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              autoPlay={false}
+              controls={false}
+              height="175px"
+              muted={true}
+              width="280px"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+            onClick={[Function]}
+          >
+            <a
+              className="small-movie-card__link"
+            >
+              Aviator
             </a>
           </h3>
         </article>

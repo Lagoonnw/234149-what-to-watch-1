@@ -1,16 +1,28 @@
-import React    from 'react';
-import SignIn from "../../components/sign-in/sign-in.jsx";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {getAuthStatus} from '../../reducers/user/selectors';
+import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {compose} from 'recompose';
 
 export const withPrivateRoute = (Component) => {
   return function WithPrivateRoute(props) {
-    if (props.location.pathname === `/favorites`) {
-
+    if (props.isAuthorizationRequired) {
+      return <Redirect to="/login"/>;
     }
-    console.log('', props);
-    return <Component/>;
+    WithPrivateRoute.propTypes = {
+      isAuthorizationRequired: PropTypes.bool.isRequired
+    };
+
+    return <Component {...props}/>;
   };
 };
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  isAuthorizationRequired: getAuthStatus(state)
+});
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps) {
+export default compose(
+    connect(mapStateToProps, null),
+    withPrivateRoute);
 
-}
+

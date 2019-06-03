@@ -75,12 +75,14 @@ export const withFormData = (Component) => {
 
     _sendForm() {
       const {password, email} = this.state;
-      this.props.login({email, password});
+      this.props.login({email, password})
+        .then(() => this.props.history.goBack());
     }
   }
 
   WithFormData.propTypes = {
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    history: PropTypes.object
   };
 
   return WithFormData;
