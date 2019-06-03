@@ -14,3 +14,5 @@ export const getFilteredMovies = createSelector(
     getMovies,
     (genre, movies) => filterMovies(movies, GenreMap[genre])
 );
+
+export const getCurrentMovie = (state, id) => state[NameSpaces.MOVIES].movies.find((movie) => movie.id === id);
