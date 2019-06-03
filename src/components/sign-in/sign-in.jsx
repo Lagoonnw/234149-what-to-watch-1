@@ -1,5 +1,9 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {getAuthFailedStatus} from '../../reducers/user/selectors';
+import {userAction} from '../../actions/user/action';
+import {withFormData} from '../../hocs/with-form-data/with-form-data.jsx';
 
 export const SignIn = ({onSubmit, onChange, fieldValidity, fieldTouched, authFailed = false}) => (
   <Fragment>
@@ -63,3 +67,13 @@ SignIn.propTypes = {
   fieldTouched: PropTypes.object.isRequired,
   authFailed: PropTypes.bool
 };
+
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  authFailed: getAuthFailedStatus(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (data) => dispatch(userAction.login(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withFormData(SignIn));

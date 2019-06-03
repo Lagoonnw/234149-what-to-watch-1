@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {API_BASE_URL} from './constants/constants';
 import {userAction} from './actions/user/action';
-import {ResponseStatus} from "./constants/constants";
+import {ResponseStatus} from './constants/constants';
 
 export const createAPI = (dispatch) => {
   const api = axios.create({
@@ -15,6 +15,7 @@ export const createAPI = (dispatch) => {
   const onFail = (err) => {
     if (err.response.status === ResponseStatus.FORBIDDEN) {
       dispatch(userAction.setAuthStatus(false));
+      history.pushState(null, null, `/login`);
     }
     if (err.response.status === ResponseStatus.BAD_REQUEST) {
       dispatch(userAction.setAuthFailed(true));

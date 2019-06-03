@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 import {createAPI} from './api';
 import {moviesAction} from './actions/movies/action';
+import {BrowserRouter} from 'react-router-dom';
 
 const init = () => {
   const api = createAPI((...args) => store.dispatch(...args));
@@ -23,7 +24,9 @@ const init = () => {
   const rootElement = document.querySelector(`#root`);
   ReactDom.render(
       <Provider store={store}>
-        <App/>
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
       </Provider>,
       rootElement);
 };
