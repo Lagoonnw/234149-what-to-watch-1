@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {SignIn} from './sign-in.jsx';
+import {ProviderMock} from '../../__mock__/providerMock.jsx';
 
 const mockProps = {
   onSubmit: jest.fn(),
@@ -17,7 +18,7 @@ const mockProps = {
 
 describe(`SignIn snapshot test`, () => {
   test(`Should render component correctly`, () => {
-    const tree = renderer.create(<SignIn {...mockProps}/>).toJSON();
+    const tree = renderer.create(<ProviderMock><SignIn {...mockProps}/></ProviderMock>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

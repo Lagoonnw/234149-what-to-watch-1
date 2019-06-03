@@ -13,9 +13,18 @@ const mockEvent = (inputName, inputValue) => ({
   }
 });
 
+const mockPromise = () => new Promise((resolve, reject) => {
+  resolve(`success`);
+  reject(`fail`);
+});
+
+const mockHistory = {
+  goBack: jest.fn()
+};
+
 describe(`WithFormData hoc test`, () => {
   test(`Should call change state on change both fields`, () => {
-    const component = shallow(<MockFormWithFormData login={jest.fn()}/>);
+    const component = shallow(<MockFormWithFormData login={mockPromise} history={mockHistory}/>);
     component.props().onChange(mockEvent(`email`, `test@test.com`));
     expect(component.state()).toEqual({
       email: `test@test.com`,
@@ -32,7 +41,8 @@ describe(`WithFormData hoc test`, () => {
     });
   });
   test(`Should call login from props on submit`, () => {
-    const component = shallow(<MockFormWithFormData login={jest.fn()}/>);
+    const spy = jest.spyOn(MockFormWithFormData.prototype, `_submitHandler`);
+    const component = shallow(<MockFormWithFormData login={mockPromise} history={mockHistory}/>);
     component.setState({
       email: `test@test.com`,
       password: `gts1258`,
@@ -41,18 +51,6 @@ describe(`WithFormData hoc test`, () => {
     });
     component.update();
     component.props().onSubmit({preventDefault: jest.fn()});
-    expect(component.instance().props.login).toHaveBeenCalled();
-  });
-  test(`Should not call login from props on submit with invalid state`, () => {
-    const component = shallow(<MockFormWithFormData login={jest.fn()}/>);
-    component.setState({
-      email: null,
-      password: `gts1258`,
-      fieldValidity: {email: false, password: true},
-      fieldTouched: {email: false, password: true}
-    });
-    component.update();
-    component.props().onSubmit({preventDefault: jest.fn()});
-    expect(component.instance().props.login).toHaveBeenCalledTimes(0);
+    expect(spy).toHaveBeenCalled();
   });
 });

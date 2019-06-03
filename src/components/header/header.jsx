@@ -1,38 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getUserProfile, getAuthFailedStatus} from '../../reducers/user/selectors';
-import {userAction} from '../../actions/user/action';
+import {getUserProfile} from '../../reducers/user/selectors';
 import {BASE_URL} from '../../constants/constants';
+import {Link} from 'react-router-dom';
 
 export const Header = (props) => {
   const {
     shouldShowAvatar,
-    isAuthorizationRequired,
-    onClick,
     userPic,
+    className
   } = props;
 
-  const _onClick = (e) => {
-    e.preventDefault();
-    onClick(!isAuthorizationRequired);
-  };
-
   return (
-    <header className="page-header movie-card__head">
+    <header className={`page-header ${className}`}>
       <div className="logo">
-        <a href="main.html" className="logo__link">
+        <Link className="logo__link" to="/">
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
-        </a>
+        </Link>
       </div>
 
       <div className="user-block">
         {shouldShowAvatar && <div className="user-block__avatar">
-          <img src={userPic} alt="User avatar" width="63" height="63"/>
+          <Link to="/favorites">
+            <img src={userPic} alt="User avatar" width="63" height="63"/>
+          </Link>
         </div>}
-        {!shouldShowAvatar && <a href="#" className="user-block__link" onClick={_onClick}>Sign in</a>}
+        {!shouldShowAvatar && <Link className="user-block__link" to="/login">Sign in</Link>}
       </div>
     </header>
   );
@@ -40,9 +36,9 @@ export const Header = (props) => {
 
 Header.propTypes = {
   shouldShowAvatar: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
   userPic: PropTypes.string,
-  isAuthorizationRequired: PropTypes.bool
+  isAuthorizationRequired: PropTypes.bool,
+  className: PropTypes.string
 };
 
 Header.defaultProps = {
@@ -55,13 +51,8 @@ const mapStateToProps = (state, ownProps) => {
 
   return Object.assign({}, ownProps, {
     shouldShowAvatar: Boolean(profile),
-    isAuthorizationRequired: getAuthFailedStatus(state),
     userPic: (profile) ? `${BASE_URL}${profile[`avatarUrl`]}` : null
   });
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onClick: (status) => dispatch(userAction.setAuthStatus(status))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, null)(Header);
