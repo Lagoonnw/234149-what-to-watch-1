@@ -12,8 +12,11 @@ export const withActiveItem = (Component) => {
       };
     }
 
+    componentWillUnmount() {
+      clearTimeout(this._timerId);
+    }
+
     render() {
-      console.log('', this.props);
       const props = Object.assign({}, this.props, {
         onClick: this._clickHandler,
         onMouseEnter: this._mouseEnterHandler,

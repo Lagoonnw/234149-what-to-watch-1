@@ -7,7 +7,8 @@ export const ActionType = {
   SET_PROFILE: `SET_PROFILE`,
   LOGIN: `LOGIN`,
   SET_AUTH_FAILED: `SET_AUTH_FAILED`,
-  SET_FAVORITES: `SET_FAVORITES`
+  SET_FAVORITES: `SET_FAVORITES`,
+  CHECK_AUTH: `CHECK_AUTH`
 };
 
 export const userAction = {
@@ -26,6 +27,13 @@ export const userAction = {
     return api.get(APIEndpoints.FAVORITE)
       .then((response) => {
         dispatch(userAction.setFavoriteMovies(response.data.map((movie) => convertObjectKeysToCamel(movie))));
+      });
+  },
+  checkUserAuth: () => (dispatch, _getState, api) => {
+    return api.get(APIEndpoints.LOGIN)
+      .then((response) => {
+        dispatch(userAction.setProfile(convertObjectKeysToCamel(response.data)));
+        dispatch(userAction.setAuthStatus(false));
       });
   }
 };

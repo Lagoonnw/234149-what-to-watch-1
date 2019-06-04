@@ -1,13 +1,16 @@
 import {createSelector} from 'reselect';
-import {filterMovies} from '../../helpers/filter-movies/filter-movies';
-import {GenreMap} from '../../constants/constants';
-import {NameSpaces} from '../name-spaces';
+import {filterMovies}   from '../../helpers/filter-movies/filter-movies';
+import {GenreMap}       from '../../constants/constants';
+import {NameSpaces}     from '../name-spaces';
+import {sortArray}      from '../../helpers/sort-array/sort-array';
 
 export const getMovies = (state) => state[NameSpaces.MOVIES].movies;
 
 export const getGenres = (state) => state[NameSpaces.MOVIES].genres;
 
 export const getActiveGenre = (state) => state[NameSpaces.MOVIES].activeGenre;
+
+export const getReviews = (state) => state[NameSpaces.MOVIES].reviews;
 
 export const getFilteredMovies = createSelector(
     getActiveGenre,
@@ -16,3 +19,8 @@ export const getFilteredMovies = createSelector(
 );
 
 export const getCurrentMovie = (state, id) => state[NameSpaces.MOVIES].movies.find((movie) => movie.id === id);
+
+export const getSortedReviews = createSelector(
+    getReviews,
+    (reviews) => sortArray.byDate(reviews)
+);

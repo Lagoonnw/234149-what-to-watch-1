@@ -9,6 +9,7 @@ import {compose}                      from 'recompose';
 import {createAPI}                    from './api';
 import {moviesAction}                 from './actions/movies/action';
 import {BrowserRouter}                from 'react-router-dom';
+import {userAction}                   from './actions/user/action';
 
 const init = () => {
   const api = createAPI((...args) => store.dispatch(...args));
@@ -20,6 +21,7 @@ const init = () => {
   );
 
   store.dispatch(moviesAction.loadMovies());
+  store.dispatch(userAction.checkUserAuth());
 
   const rootElement = document.querySelector(`#root`);
   ReactDom.render(

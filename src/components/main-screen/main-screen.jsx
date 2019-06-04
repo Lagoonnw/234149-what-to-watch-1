@@ -11,6 +11,7 @@ const MoviesListWithActiveItem = withActiveItem(MoviesList);
 const MoviesFilterWithActiveItem = withActiveItem(MoviesFilter);
 
 export const MainScreen = ({movies}) => {
+
   return (<Fragment>
     <div className="visually-hidden">
       <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -101,7 +102,7 @@ export const MainScreen = ({movies}) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <MoviesFilterWithActiveItem/>
-        <MoviesListWithActiveItem movies={movies}/>
+        <MoviesListWithActiveItem movies={movies} />
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
         </div>

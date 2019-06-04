@@ -34,7 +34,8 @@ export const DefaultVideoSize = {
 export const APIEndpoints = {
   FILMS: `/films`,
   LOGIN: `/login`,
-  FAVORITE: `/favorite`
+  FAVORITE: `/favorite`,
+  REVIEWS: `/comments/`
 };
 
 export const ResponseStatus = {
@@ -44,4 +45,16 @@ export const ResponseStatus = {
   BAD_REQUEST: 400
 };
 
+export const FilmCardTab = {
+  OVERVIEW: `Overview`,
+  DETAILS: `Details`,
+  REVIEWS: `Reviews`
+};
 
+export const Raiting = {
+  BAD: `Bad`,
+  NORMAL: `Normal`,
+  GOOD: `Good`,
+  VERY_GOOD: `Very good`,
+  AWESOME: `Awesome`
+};
