@@ -1,16 +1,20 @@
-import React, {Fragment}    from 'react';
-import {connect}            from 'react-redux';
-import {getCurrentMovie}    from "../../reducers/movies/selectors";
-import {FilmOverview}       from '../film-overview/film-overview.jsx';
-import {FilmDetails}        from "../film-details/film-details.jsx";
-import {FilmCardNavigation} from "../film-card-navigation/film-card-navigation.jsx";
-import {FilmReviews}        from "../film-reviews/film-reviews.jsx";
-import {FilmHero}           from "../film-hero/film-hero.jsx";
-import withLoadingReviews   from "../../hocs/with-loading-reviews/with-loading-reviews.jsx";
+import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {getCurrentMovie} from '../../reducers/movies/selectors';
+import {FilmOverview} from '../film-overview/film-overview.jsx';
+import {FilmDetails} from '../film-details/film-details.jsx';
+import {FilmCardNavigation} from '../film-card-navigation/film-card-navigation.jsx';
+import {FilmReviews} from '../film-reviews/film-reviews.jsx';
+import {FilmHero} from '../film-hero/film-hero.jsx';
+import withLoadingReviews from '../../hocs/with-loading-reviews/with-loading-reviews.jsx';
+import {withActiveItem} from '../../hocs/with-active-item/with-active-item.jsx';
+import MoreLikeThis from '../more-like-this/more-like-this.jsx';
 
 const FilmReviewsWithLoadingReviews = withLoadingReviews(FilmReviews);
+const MoreLikeThisWithActiveItem = withActiveItem(MoreLikeThis);
 
-export const FilmCard = ({ movie, onClick, activeItem}) => {
+export const FilmCard = ({movie, onClick, activeItem}) => {
   const {id, name, genre, released, posterImage, backgroundColor, backgroundImage} = movie;
   const activeTab = (!activeItem) ? `Overview` : activeItem;
 
@@ -80,54 +84,36 @@ export const FilmCard = ({ movie, onClick, activeItem}) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
+          <MoreLikeThisWithActiveItem genre={genre} id={id}/>
 
-          <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
-                  Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-              </h3>
-            </article>
-          </div>
         </section>
       </div>
     </Fragment>
   );
+};
+
+FilmCard.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    posterImage: PropTypes.string,
+    previewImage: PropTypes.string,
+    backgroundImage: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    videoLink: PropTypes.string,
+    previewVideoLink: PropTypes.string,
+    description: PropTypes.string,
+    rating: PropTypes.number,
+    scoresCount: PropTypes.number,
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number,
+    genre: PropTypes.string,
+    released: PropTypes.number,
+    isFavorite: PropTypes.bool
+  }).isRequired,
+  onClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.string
 };
 
 const mapStateToProps = (state, ownProps) => {
