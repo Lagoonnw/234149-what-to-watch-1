@@ -7,6 +7,7 @@ import {FilmCardNavigation} from "../film-card-navigation/film-card-navigation.j
 import {FilmReviews}        from "../film-reviews/film-reviews.jsx";
 import {FilmHero}           from "../film-hero/film-hero.jsx";
 import withLoadingReviews   from "../../hocs/with-loading-reviews/with-loading-reviews.jsx";
+import {FullPlayerWithVideo} from '../full-video-player/full-video-player.jsx';
 
 const FilmReviewsWithLoadingReviews = withLoadingReviews(FilmReviews);
 
