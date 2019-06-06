@@ -1,5 +1,6 @@
-import React, {Fragment}      from 'react';
-import {convertReviewRaiting} from "../../helpers/convert-review-raiting/convert-review-raiting";
+import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
+import {convertReviewRaiting} from '../../helpers/convert-review-raiting/convert-review-raiting';
 
 export const FilmOverview = ({description, rating, director, starring, scoresCount}) => {
   return (
@@ -23,3 +24,10 @@ export const FilmOverview = ({description, rating, director, starring, scoresCou
   );
 };
 
+FilmOverview.propTypes = {
+  description: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  director: PropTypes.string.isRequired,
+  starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+  scoresCount: PropTypes.number.isRequired
+};

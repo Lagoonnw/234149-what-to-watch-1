@@ -7,7 +7,8 @@ export const withVideo = (Component) => {
       super(props);
       this._videoRef = createRef();
       this.state = {
-        isPlaying: props.isPlaying
+        isPlaying: props.isPlaying,
+        progress: 0
       };
     }
 
@@ -23,8 +24,7 @@ export const withVideo = (Component) => {
       if (this.props.isPlaying) {
         video.play();
       } else {
-        video.pause();
-        video.load();
+        this._pauseVideo(video);
       }
     }
 
@@ -36,7 +36,8 @@ export const withVideo = (Component) => {
     render() {
       const props = Object.assign({}, this.props, {
         isPlaying: this.state.isPlaying,
-        reference: this._videoRef
+        reference: this._videoRef,
+        progress: this.state.progress
       });
 
       return <Component {...props} />;
@@ -54,18 +55,33 @@ export const withVideo = (Component) => {
       video.onpause = () => this.setState({
         isPlaying: false,
       });
+
+      video.ontimeupdate = () => this.setState({
+        progress: video.currentTime
+      });
     }
 
     _resetCurrentPlayer(video) {
       video.onplay = null;
       video.onpause = null;
       video.src = ``;
+      video.ontimeupdate = null;
+    }
+
+    _pauseVideo(video) {
+      if (!this.props.controls) {
+        video.pause();
+        video.load();
+      } else {
+        video.pause();
+      }
     }
   }
 
   WithVideo.propTypes = {
     isPlaying: PropTypes.bool.isRequired,
-    src: PropTypes.string.isRequired
+    src: PropTypes.string.isRequired,
+    controls: PropTypes.bool
   };
 
   return WithVideo;

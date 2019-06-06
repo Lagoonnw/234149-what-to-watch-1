@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {VideoPlayer} from '../video-player/video-player.jsx';
+import React       from 'react';
+import PropTypes   from 'prop-types';
+import {Video}     from '../video-player/video.jsx';
 import {withVideo} from '../../hocs/with-video/with-video.jsx';
-import {Link} from 'react-router-dom';
+import {Link}      from 'react-router-dom';
 
-const VideoPlayerWrapped = withVideo(VideoPlayer);
+const VideoPlayerWrapped = withVideo(Video);
 
 export const MovieCard = (props) => {
   const {

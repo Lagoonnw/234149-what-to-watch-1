@@ -1,12 +1,11 @@
-import React        from 'react';
-import {sortArray}  from "../../helpers/sort-array/sort-array";
-import {ReviewCard} from "../review-card/review-card.jsx";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {sortArray} from '../../helpers/sort-array/sort-array';
+import {ReviewCard} from '../review-card/review-card.jsx';
 
-export const FilmReviews = ({reviews}) => {
+export const Reviews = ({reviews = []}) => {
   const oddReviews = sortArray.byOddIndex(reviews);
   const evenReviews = sortArray.byEvenIndex(reviews);
-  console.log('odd', oddReviews);
-  console.log('even', evenReviews);
 
   return (
     <div className="movie-card__reviews movie-card__row">
@@ -18,4 +17,17 @@ export const FilmReviews = ({reviews}) => {
       </div>
     </div>
   );
+};
+
+Reviews.propTypes = {
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    rating: PropTypes.number,
+    comment: PropTypes.string,
+    date: PropTypes.string,
+    user: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string
+    })
+  }))
 };

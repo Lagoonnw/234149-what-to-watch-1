@@ -1,17 +1,23 @@
-import React, {Fragment}    from 'react';
-import {connect}            from 'react-redux';
-import {getCurrentMovie}    from "../../reducers/movies/selectors";
-import {FilmOverview}       from '../film-overview/film-overview.jsx';
-import {FilmDetails}        from "../film-details/film-details.jsx";
-import {FilmCardNavigation} from "../film-card-navigation/film-card-navigation.jsx";
-import {FilmReviews}        from "../film-reviews/film-reviews.jsx";
-import {FilmHero}           from "../film-hero/film-hero.jsx";
-import withLoadingReviews   from "../../hocs/with-loading-reviews/with-loading-reviews.jsx";
-import {FullPlayerWithVideo} from '../full-video-player/full-video-player.jsx';
+import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {getCurrentMovie} from '../../reducers/movies/selectors';
+import {FilmOverview} from '../film-overview/film-overview.jsx';
+import {FilmDetails} from '../film-details/film-details.jsx';
+import {FilmCardNavigation} from '../film-card-navigation/film-card-navigation.jsx';
+import {Reviews}          from '../reviews/reviews.jsx';
+import {FilmHero}         from '../film-hero/film-hero.jsx';
+import withLoadingReviews from '../../hocs/with-loading-reviews/with-loading-reviews.jsx';
+import {withActiveItem}   from '../../hocs/with-active-item/with-active-item.jsx';
+import MoreLikeThis       from '../more-like-this/more-like-this.jsx';
+import {playerAction}     from '../../actions/player/action';
+import VideoPlayer        from "../full-video-player/full-video-player.jsx";
+import {getPlayingStatus} from "../../reducers/player/selector";
 
-const FilmReviewsWithLoadingReviews = withLoadingReviews(FilmReviews);
+const FilmReviews = withLoadingReviews(Reviews);
+const MoreLikeThisWithActiveItem = withActiveItem(MoreLikeThis);
 
-export const FilmCard = ({ movie, onClick, activeItem}) => {
+export const FilmCard = ({movie, onClick, activeItem, startPlay, playerIsActive}) => {
   const {id, name, genre, released, posterImage, backgroundColor, backgroundImage} = movie;
   const activeTab = (!activeItem) ? `Overview` : activeItem;
 
@@ -60,7 +66,14 @@ export const FilmCard = ({ movie, onClick, activeItem}) => {
         </svg>
       </div>
       <section className="movie-card movie-card--full" style={{backgroundColor}}>
-        <FilmHero genre={genre} name={name} backgroundImage={backgroundImage} released={released} />
+        <FilmHero
+          genre={genre}
+          name={name}
+          backgroundImage={backgroundImage}
+          released={released}
+          onPlayClick={startPlay}
+          id={id}
+        />
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
@@ -72,7 +85,7 @@ export const FilmCard = ({ movie, onClick, activeItem}) => {
               <FilmCardNavigation onClick={onClick} activeTab={activeTab}/>
               {activeTab === `Overview` && <FilmOverview {...movie}/>}
               {activeTab === `Details` && <FilmDetails {...movie}/>}
-              {activeTab === `Reviews` && <FilmReviewsWithLoadingReviews id={id}/>}
+              {activeTab === `Reviews` && <FilmReviews id={id}/>}
             </div>
           </div>
         </div>
@@ -81,62 +94,51 @@ export const FilmCard = ({ movie, onClick, activeItem}) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
+          <MoreLikeThisWithActiveItem genre={genre} id={id}/>
 
-          <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
-                  Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">Play</button>
-              <div className="small-movie-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-              </h3>
-            </article>
-          </div>
         </section>
       </div>
+      {playerIsActive && <VideoPlayer/>}
     </Fragment>
   );
+};
+
+FilmCard.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    posterImage: PropTypes.string,
+    previewImage: PropTypes.string,
+    backgroundImage: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    videoLink: PropTypes.string,
+    previewVideoLink: PropTypes.string,
+    description: PropTypes.string,
+    rating: PropTypes.number,
+    scoresCount: PropTypes.number,
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number,
+    genre: PropTypes.string,
+    released: PropTypes.number,
+    isFavorite: PropTypes.bool
+  }).isRequired,
+  onClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.string
 };
 
 const mapStateToProps = (state, ownProps) => {
   const {match: {params: {id}}} = ownProps;
 
   return Object.assign({}, ownProps, {
-    movie: getCurrentMovie(state, parseInt(id, 10))
+    movie: getCurrentMovie(state, parseInt(id, 10)),
+    playerIsActive: getPlayingStatus(state)
   });
 };
 
-export default connect(mapStateToProps, null)(FilmCard);
+const mapDispatchToProps = (dispatch) => ({
+  startPlay: (movieId) => dispatch(playerAction.startPlay(movieId))
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilmCard);

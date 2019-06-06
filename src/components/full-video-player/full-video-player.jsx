@@ -1,15 +1,38 @@
-import React, {PureComponent, Fragment} from 'react';
-import {VideoPlayer} from '../video-player/video-player.jsx';
+import React, {PureComponent, Fragment, createRef} from 'react';
+import {Video} from '../video-player/video.jsx';
 import {withVideo} from '../../hocs/with-video/with-video.jsx';
+import {PlayerButton} from "../player-button/player-button.jsx";
+import {connect} from 'react-redux';
+import {getMovie, getPlayingStatus} from "../../reducers/player/selector";
+import {playerAction} from "../../actions/player/action";
 
-class FullVideoPlayer extends PureComponent {
+const VideoWithControls = withVideo(Video);
+
+export class VideoPlayer extends PureComponent {
+  constructor(props) {
+    super(props);
+    // this._container = createRef();
+    this.state = {
+      height: 500,
+      width: 1000
+    };
+
+    console.log('const',this._container );
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('cdU', this._container);
+  }
+
   render() {
-    const {reference, src, poster} = this.props;
-
+    const {isPlaying, movie, exitPlayer} = this.props;
+    const {height, width} = this.state;
+    console.log('render', this._container );
+    // console.log('', this._container);
     return (
       <Fragment>
         <div className="visually-hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <svg >
             <symbol id="add" viewBox="0 0 19 20">
               <title>+</title>
               <desc>Created with Sketch.</desc>
@@ -51,29 +74,36 @@ class FullVideoPlayer extends PureComponent {
           </svg>
         </div>
 
-        <div className="player">
-          {/* <video src="#" className="player__video" poster="img/player-poster.jpg"></video>*/}
-          <VideoPlayer src={src} reference={reference} poster={poster}/>>
+        <div className="player" ref={(r) => this._containre = r}>
+          {/* <video src="#" className="player__video" poster={movie.previewImage}/>*/}
+          {/* <Video src={src} reference={reference} poster={poster} muted={false}/> */}
 
-          <button type="button" className="player__exit">Exit</button>
+          <VideoWithControls
+            className="player__video"
+            src={movie.videoLink}
+            poster={movie.previewImage}
+            muted={false}
+            isPlaying={isPlaying}
+            controls={true}
+            height={height}
+            width={width}
+          />
+
+
+          <button type="button" className="player__exit" onClick={exitPlayer}>Exit</button>
 
           <div className="player__controls">
             <div className="player__controls-row">
               <div className="player__time">
-                <progress className="player__progress" value="30" max="100"></progress>
-                <div className="player__toggler" style="left: 30%;">Toggler</div>
+                <progress className="player__progress" value="30" max="100"/>
+                <div className="player__toggler" style={{left: `30%`}}>Toggler</div>
               </div>
               <div className="player__time-value">1:30:29</div>
             </div>
 
             <div className="player__controls-row">
-              <button type="button" className="player__play">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
-              <div className="player__name">Transpotting</div>
+              <PlayerButton onClick={() => {}} isPlaying={isPlaying}/>
+              <div className="player__name">{movie.name}</div>
 
               <button type="button" className="player__full-screen">
                 <svg viewBox="0 0 27 27" width="27" height="27">
@@ -89,4 +119,13 @@ class FullVideoPlayer extends PureComponent {
   }
 }
 
-export const FullPlayerWithVideo = withVideo(FullVideoPlayer);
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  movie: getMovie(state),
+  isPlaying: getPlayingStatus(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  exitPlayer: () => dispatch(playerAction.exitPlayer())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(VideoPlayer);

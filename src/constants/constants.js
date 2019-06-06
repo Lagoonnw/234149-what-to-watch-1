@@ -1,4 +1,5 @@
 export const VIDEO_PLAY_DELAY_TIME = 1000;
+export const MORE_LIKE_THIS_NUMBER = 4;
 export const API_BASE_URL = `https://es31-server.appspot.com/wtw`;
 export const BASE_URL = `https://es31-server.appspot.com`;
 
@@ -19,11 +20,11 @@ export const GenreMap = {
   Crime: `Crime`,
   Documentary: `Documentary`,
   Dramas: `Drama`,
-  Horror: `Horror`,
+  Action: `Action`,
   Romance: `Romance`,
   Thrillers: `Thriller`,
-  [`Sci-Fi`]: `Sci-fi`,
-  [`Kids & Family`]: `Family`
+  Adventures: `Adventure`,
+  Fantasy: `Fantasy`
 };
 
 export const DefaultVideoSize = {

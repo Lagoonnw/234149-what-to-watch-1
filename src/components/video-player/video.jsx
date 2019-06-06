@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {DefaultVideoSize} from '../../constants/constants';
 
-export const VideoPlayer = (props) => {
+export const Video = (props) => {
   const {
     poster,
     src,
@@ -10,7 +10,6 @@ export const VideoPlayer = (props) => {
     autoPlay,
     width,
     height,
-    controls,
     reference
   } = props;
 
@@ -19,7 +18,6 @@ export const VideoPlayer = (props) => {
       poster={poster}
       width={`${width}px`}
       height={`${height}px`}
-      controls={controls}
       src={src}
       muted={muted}
       autoPlay={autoPlay}
@@ -28,7 +26,7 @@ export const VideoPlayer = (props) => {
   );
 };
 
-VideoPlayer.propTypes = {
+Video.propTypes = {
   poster: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
   muted: PropTypes.bool,
@@ -40,7 +38,7 @@ VideoPlayer.propTypes = {
   reference: PropTypes.object.isRequired
 };
 
-VideoPlayer.defaultProps = {
+Video.defaultProps = {
   muted: false,
   autoPlay: false,
   width: DefaultVideoSize.WIDTH,
