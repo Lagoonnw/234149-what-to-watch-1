@@ -22,6 +22,7 @@ export const Video = (props) => {
       muted={muted}
       autoPlay={autoPlay}
       ref={reference}
+      style={{objectFit: `cover`}}
     />
   );
 };

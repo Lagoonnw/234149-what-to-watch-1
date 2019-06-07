@@ -1,34 +1,49 @@
 import React, {PureComponent, Fragment, createRef} from 'react';
-import {Video} from '../video-player/video.jsx';
-import {withVideo} from '../../hocs/with-video/with-video.jsx';
-import {PlayerButton} from "../player-button/player-button.jsx";
-import {connect} from 'react-redux';
-import {getMovie, getPlayingStatus} from "../../reducers/player/selector";
-import {playerAction} from "../../actions/player/action";
+import {Video}                                     from '../video-player/video.jsx';
+import {withVideo}                                 from '../../hocs/with-video/with-video.jsx';
+import {PlayerButton}                              from "../player-button/player-button.jsx";
+import {connect}                                   from 'react-redux';
+import {getMovie, getPlayingStatus}                from "../../reducers/player/selector";
+import {playerAction}                              from "../../actions/player/action";
+import {formatTime}                                from "../../helpers/formatTime";
 
 const VideoWithControls = withVideo(Video);
 
 export class VideoPlayer extends PureComponent {
   constructor(props) {
     super(props);
-    // this._container = createRef();
+    this._container = createRef();
     this.state = {
-      height: 500,
-      width: 1000
+      height: 0,
+      width: 0,
+      time: 0
     };
+    this._getTime = this._getTime.bind(this);
+  }
 
-    console.log('const',this._container );
+  componentDidMount() {
+    const c = this._container.current;
+    this.setState({
+      height: c.offsetHeight,
+      width: c.offsetWidth
+    })
+    console.log('cDM',c );
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log('cdU', this._container);
   }
 
+  _getTime(value) {
+    this.setState({time: value})
+    console.log('222',value );
+  }
+
   render() {
     const {isPlaying, movie, exitPlayer} = this.props;
     const {height, width} = this.state;
-    console.log('render', this._container );
-    // console.log('', this._container);
+
+    console.log('444', this.state);
     return (
       <Fragment>
         <div className="visually-hidden">
@@ -74,7 +89,7 @@ export class VideoPlayer extends PureComponent {
           </svg>
         </div>
 
-        <div className="player" ref={(r) => this._containre = r}>
+        <div className="player" ref={this._container}>
           {/* <video src="#" className="player__video" poster={movie.previewImage}/>*/}
           {/* <Video src={src} reference={reference} poster={poster} muted={false}/> */}
 
@@ -87,6 +102,7 @@ export class VideoPlayer extends PureComponent {
             controls={true}
             height={height}
             width={width}
+            onTimeChange={this._getTime}
           />
 
 
@@ -98,7 +114,7 @@ export class VideoPlayer extends PureComponent {
                 <progress className="player__progress" value="30" max="100"/>
                 <div className="player__toggler" style={{left: `30%`}}>Toggler</div>
               </div>
-              <div className="player__time-value">1:30:29</div>
+              <div className="player__time-value">{formatTime(this.state.time)}</div>
             </div>
 
             <div className="player__controls-row">

@@ -19,12 +19,16 @@ export const withVideo = (Component) => {
     }
 
     componentDidUpdate() {
+      const {onTimeChange} = this.props;
       const video = this._videoRef.current;
 
       if (this.props.isPlaying) {
         video.play();
       } else {
         this._pauseVideo(video);
+      }
+      if (onTimeChange) {
+        onTimeChange(this.state.progress);
       }
     }
 
@@ -41,6 +45,10 @@ export const withVideo = (Component) => {
       });
 
       return <Component {...props} />;
+    }
+
+    _fillScreenHandler(video){
+      // if(video.fu)
     }
 
     _initCurrentPlayer({video, src}) {
@@ -81,7 +89,8 @@ export const withVideo = (Component) => {
   WithVideo.propTypes = {
     isPlaying: PropTypes.bool.isRequired,
     src: PropTypes.string.isRequired,
-    controls: PropTypes.bool
+    controls: PropTypes.bool,
+    onTimeChange: PropTypes.func
   };
 
   return WithVideo;
