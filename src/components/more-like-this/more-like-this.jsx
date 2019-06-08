@@ -4,10 +4,11 @@ import {getMoreLikeThis} from '../../reducers/movies/selectors';
 import {connect} from 'react-redux';
 import {MovieCard} from '../movie-card/movie-card.jsx';
 
-export const MoreLikeThis = ({movies = [], onMouseLeave, onMouseEnter}) => (
+export const MoreLikeThis = ({movies = [], onMouseLeave, onMouseEnter, activeItem = null}) => (
   <div className="catalog__movies-list">
     {movies.map((movie) => {
       const _onMouseEnter = () => onMouseEnter(movie.id);
+      const isPlaying = movie.id === activeItem;
       return (
         <MovieCard
           key={`movie-${movie.id}`}
@@ -16,7 +17,9 @@ export const MoreLikeThis = ({movies = [], onMouseLeave, onMouseEnter}) => (
           name={movie.name} src={movie.previewVideoLink}
           genre={movie.genre}
           id={movie.id}
-          poster={movie.previewImage}/>
+          poster={movie.previewImage}
+          isPlaying={isPlaying}
+        />
       );
     }
     )}
@@ -44,7 +47,8 @@ MoreLikeThis.propTypes = {
     isFavorite: PropTypes.bool
   })),
   onMouseLeave: PropTypes.func.isRequired,
-  onMouseEnter: PropTypes.func.isRequired
+  onMouseEnter: PropTypes.func.isRequired,
+  activeItem: PropTypes.number
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {

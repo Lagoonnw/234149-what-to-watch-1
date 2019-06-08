@@ -1,8 +1,8 @@
-import React       from 'react';
-import PropTypes   from 'prop-types';
-import {Video}     from '../video-player/video.jsx';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Video} from '../video/video.jsx';
 import {withVideo} from '../../hocs/with-video/with-video.jsx';
-import {Link}      from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const VideoPlayerWrapped = withVideo(Video);
 

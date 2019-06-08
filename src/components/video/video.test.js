@@ -1,6 +1,6 @@
-import React            from 'react';
-import renderer         from 'react-test-renderer';
-import {Video}          from './video.jsx';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import {Video} from './video.jsx';
 import {createNodeMock} from '../../__mock__/createMockNode';
 
 describe(`Video player snapshot`, () => {

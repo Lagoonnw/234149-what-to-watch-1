@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import {formateMovieRunTime} from '../../helpers/format-movie-run-time/format-movie-run-time';
+import {formatMovieRunTime} from '../../helpers/format-movie-run-time/format-movie-run-time';
 
 export const FilmDetails = ({director, starring, runTime, genre, released}) => (
   <div className="movie-card__text movie-card__row">
@@ -20,7 +20,7 @@ export const FilmDetails = ({director, starring, runTime, genre, released}) => (
     <div className="movie-card__text-col">
       <p className="movie-card__details-item">
         <strong className="movie-card__details-name">Run Time</strong>
-        <span className="movie-card__details-value">{formateMovieRunTime(runTime)}</span>
+        <span className="movie-card__details-value">{formatMovieRunTime(runTime)}</span>
       </p>
       <p className="movie-card__details-item">
         <strong className="movie-card__details-name">Genre</strong>

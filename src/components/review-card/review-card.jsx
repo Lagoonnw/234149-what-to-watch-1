@@ -1,4 +1,5 @@
-import React        from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {formatDate} from '../../helpers/format-date/format-date';
 
 export const ReviewCard = ({comment, user, rating, date}) => (
@@ -20,4 +21,14 @@ export const ReviewCard = ({comment, user, rating, date}) => (
     <div className="review__rating">{`${rating.toFixed(1)}`}</div>
   </div>
 );
+
+ReviewCard.propTypes = {
+  comment: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired
+  }),
+  rating: PropTypes.number.isRequired,
+  date: PropTypes.string.isRequired
+};
 

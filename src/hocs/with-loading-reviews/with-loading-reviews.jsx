@@ -1,8 +1,9 @@
 import React, {PureComponent} from 'react';
-import {connect} from "react-redux";
-import {getSortedReviews, getReviews} from "../../reducers/movies/selectors";
-import {moviesAction} from "../../actions/movies/action";
-import {compose} from "recompose";
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {getSortedReviews} from '../../reducers/movies/selectors';
+import {moviesAction} from '../../actions/movies/action';
+import {compose} from 'recompose';
 
 export const withLoadingReviews = (Component) => {
   class WithLoadingReviews extends PureComponent {
@@ -20,6 +21,22 @@ export const withLoadingReviews = (Component) => {
       return <Component reviews={reviews}/>;
     }
   }
+
+  WithLoadingReviews.propTypes = {
+    id: PropTypes.number.isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      comment: PropTypes.string,
+      user: PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string
+      }),
+      rating: PropTypes.number,
+      date: PropTypes.string
+    })),
+    loadReviews: PropTypes.func.isRequired,
+    clearReviews: PropTypes.func.isRequired
+  };
 
   return WithLoadingReviews;
 };

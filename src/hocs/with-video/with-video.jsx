@@ -7,8 +7,8 @@ export const withVideo = (Component) => {
       super(props);
       this._videoRef = createRef();
       this.state = {
-        isPlaying: props.isPlaying,
-        progress: 0
+        progress: 0,
+        duration: 0
       };
     }
 
@@ -19,17 +19,17 @@ export const withVideo = (Component) => {
     }
 
     componentDidUpdate() {
-      const {onTimeChange} = this.props;
+      const {onTimeChange, onDurationChange, controls, isPlaying} = this.props;
       const video = this._videoRef.current;
 
-      if (this.props.isPlaying) {
-        video.play();
-      } else {
-        this._pauseVideo(video);
-      }
       if (onTimeChange) {
         onTimeChange(this.state.progress);
       }
+      if (onDurationChange) {
+        onDurationChange(this.state.duration);
+      }
+      this._playHandler({video, controls, isPlaying});
+      this._fillScreenHandler(video);
     }
 
     componentWillUnmount() {
@@ -47,26 +47,30 @@ export const withVideo = (Component) => {
       return <Component {...props} />;
     }
 
-    _fillScreenHandler(video){
-      // if(video.fu)
+    _fillScreenHandler(video) {
+      const {fullscreen, onFullScreenChange} = this.props;
+      if (fullscreen && !document.fullscreenElement) {
+        video.requestFullscreen();
+        onFullScreenChange(true);
+      }
     }
 
     _initCurrentPlayer({video, src}) {
       video.src = src;
 
-      video.onplay = () => {
-        this.setState({
-          isPlaying: true,
-        });
-      };
-
-      video.onpause = () => this.setState({
-        isPlaying: false,
-      });
-
       video.ontimeupdate = () => this.setState({
         progress: video.currentTime
       });
+      video.onloadedmetadata = () => this.setState({
+        duration: video.duration
+      });
+
+      video.onfullscreenchange = () => {
+        const {onFullScreenChange} = this.props;
+        if (!document.fullscreenElement) {
+          onFullScreenChange(false);
+        }
+      };
     }
 
     _resetCurrentPlayer(video) {
@@ -74,13 +78,25 @@ export const withVideo = (Component) => {
       video.onpause = null;
       video.src = ``;
       video.ontimeupdate = null;
+      video.onloadedmetadata = null;
+      video.onfullscreenchange = null;
     }
 
-    _pauseVideo(video) {
-      if (!this.props.controls) {
+    _playHandler({video, controls, isPlaying}) {
+      if (!controls) {
+        if (isPlaying) {
+          video.play();
+        } else {
+          this._pauseVideoHandler(video);
+        }
+      }
+    }
+
+    _pauseVideoHandler(video) {
+      if (this.props.muted) {
         video.pause();
         video.load();
-      } else {
+      } else if (!this.props.muted) {
         video.pause();
       }
     }
@@ -90,7 +106,11 @@ export const withVideo = (Component) => {
     isPlaying: PropTypes.bool.isRequired,
     src: PropTypes.string.isRequired,
     controls: PropTypes.bool,
-    onTimeChange: PropTypes.func
+    muted: PropTypes.bool,
+    fullscreen: PropTypes.bool,
+    onTimeChange: PropTypes.func,
+    onDurationChange: PropTypes.func,
+    onFullScreenChange: PropTypes.func
   };
 
   return WithVideo;

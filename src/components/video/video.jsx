@@ -10,7 +10,8 @@ export const Video = (props) => {
     autoPlay,
     width,
     height,
-    reference
+    reference,
+    controls
   } = props;
 
   return (
@@ -23,6 +24,7 @@ export const Video = (props) => {
       autoPlay={autoPlay}
       ref={reference}
       style={{objectFit: `cover`}}
+      controls={controls}
     />
   );
 };

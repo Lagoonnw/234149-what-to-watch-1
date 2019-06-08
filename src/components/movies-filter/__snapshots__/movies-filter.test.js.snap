@@ -67,7 +67,7 @@ exports[`Movies filter render Should render movies filter correctly 1`] = `
       className="catalog__genres-link"
       href="#"
     >
-      Horror
+      Adventure
     </a>
   </li>
   <li
@@ -78,7 +78,7 @@ exports[`Movies filter render Should render movies filter correctly 1`] = `
       className="catalog__genres-link"
       href="#"
     >
-      Kids & Family
+      Action
     </a>
   </li>
   <li
@@ -100,7 +100,7 @@ exports[`Movies filter render Should render movies filter correctly 1`] = `
       className="catalog__genres-link"
       href="#"
     >
-      Sci-Fi
+      Fantasy
     </a>
   </li>
   <li

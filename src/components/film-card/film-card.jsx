@@ -5,21 +5,27 @@ import {getCurrentMovie} from '../../reducers/movies/selectors';
 import {FilmOverview} from '../film-overview/film-overview.jsx';
 import {FilmDetails} from '../film-details/film-details.jsx';
 import {FilmCardNavigation} from '../film-card-navigation/film-card-navigation.jsx';
-import {Reviews}          from '../reviews/reviews.jsx';
-import {FilmHero}         from '../film-hero/film-hero.jsx';
+import {Reviews} from '../reviews/reviews.jsx';
+import {FilmHero} from '../film-hero/film-hero.jsx';
 import withLoadingReviews from '../../hocs/with-loading-reviews/with-loading-reviews.jsx';
-import {withActiveItem}   from '../../hocs/with-active-item/with-active-item.jsx';
-import MoreLikeThis       from '../more-like-this/more-like-this.jsx';
-import {playerAction}     from '../../actions/player/action';
-import VideoPlayer        from "../full-video-player/full-video-player.jsx";
-import {getPlayingStatus} from "../../reducers/player/selector";
+import {withActiveItem} from '../../hocs/with-active-item/with-active-item.jsx';
+import MoreLikeThis from '../more-like-this/more-like-this.jsx';
+import {playerAction} from '../../actions/player/action';
+import VideoPlayer from '../video-player/video-player.jsx';
+import {getPlayingStatus} from '../../reducers/player/selector';
+import {withFullScreen} from '../../hocs/with-full-screen/with-full-screen.jsx';
 
 const FilmReviews = withLoadingReviews(Reviews);
 const MoreLikeThisWithActiveItem = withActiveItem(MoreLikeThis);
+const VideoPlayerWithFullScreen = withFullScreen(VideoPlayer);
 
-export const FilmCard = ({movie, onClick, activeItem, startPlay, playerIsActive}) => {
+export const FilmCard = ({movie, onClick, activeItem, startPlay, isPlayerOn}) => {
   const {id, name, genre, released, posterImage, backgroundColor, backgroundImage} = movie;
   const activeTab = (!activeItem) ? `Overview` : activeItem;
+
+  if (isPlayerOn) {
+    return <VideoPlayerWithFullScreen/>;
+  }
 
   return (
     <Fragment>
@@ -95,10 +101,8 @@ export const FilmCard = ({movie, onClick, activeItem, startPlay, playerIsActive}
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MoreLikeThisWithActiveItem genre={genre} id={id}/>
-
         </section>
       </div>
-      {playerIsActive && <VideoPlayer/>}
     </Fragment>
   );
 };
@@ -124,7 +128,9 @@ FilmCard.propTypes = {
     isFavorite: PropTypes.bool
   }).isRequired,
   onClick: PropTypes.func.isRequired,
-  activeItem: PropTypes.string
+  activeItem: PropTypes.string,
+  isPlayerOn: PropTypes.bool,
+  startPlay: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -132,13 +138,12 @@ const mapStateToProps = (state, ownProps) => {
 
   return Object.assign({}, ownProps, {
     movie: getCurrentMovie(state, parseInt(id, 10)),
-    playerIsActive: getPlayingStatus(state)
+    isPlayerOn: getPlayingStatus(state)
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
   startPlay: (movieId) => dispatch(playerAction.startPlay(movieId))
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilmCard);

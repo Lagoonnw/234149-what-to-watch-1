@@ -8,10 +8,10 @@ export const genresList = new Set([
   `Crime`,
   `Documentary`,
   `Dramas`,
-  `Horror`,
-  `Kids & Family`,
+  `Adventure`,
+  `Action`,
   `Romance`,
-  `Sci-Fi`,
+  `Fantasy`,
   `Thrillers`
 ]);
 
