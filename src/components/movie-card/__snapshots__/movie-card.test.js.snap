@@ -6,25 +6,36 @@ exports[`MovieCard render Should render movie card 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[MockFunction]}
 >
-  <div
-    className="small-movie-card__image"
+  <a
+    href="/film/54545454"
+    onClick={[Function]}
   >
-    <video
-      autoPlay={false}
-      controls={false}
-      height="175px"
-      muted={true}
-      poster="pic.jpg"
-      src="video.mp4"
-      width="280px"
-    />
-  </div>
+    <div
+      className="small-movie-card__image"
+    >
+      <video
+        autoPlay={false}
+        controls={false}
+        height="175px"
+        muted={true}
+        poster="pic.jpg"
+        src="video.mp4"
+        style={
+          Object {
+            "objectFit": "cover",
+          }
+        }
+        width="280px"
+      />
+    </div>
+  </a>
   <h3
     className="small-movie-card__title"
-    onClick={[Function]}
   >
     <a
       className="small-movie-card__link"
+      href="/film/54545454"
+      onClick={[Function]}
     >
       Need Mass Effect movie
     </a>

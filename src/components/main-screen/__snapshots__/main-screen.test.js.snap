@@ -334,7 +334,7 @@ Array [
             className="catalog__genres-link"
             href="#"
           >
-            Horror
+            Adventure
           </a>
         </li>
         <li
@@ -345,7 +345,7 @@ Array [
             className="catalog__genres-link"
             href="#"
           >
-            Kids & Family
+            Action
           </a>
         </li>
         <li
@@ -367,7 +367,7 @@ Array [
             className="catalog__genres-link"
             href="#"
           >
-            Sci-Fi
+            Fantasy
           </a>
         </li>
         <li
@@ -390,23 +390,34 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/54585444"
+            onClick={[Function]}
           >
-            <video
-              autoPlay={false}
-              controls={false}
-              height="175px"
-              muted={true}
-              width="280px"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                autoPlay={false}
+                controls={false}
+                height="175px"
+                muted={true}
+                style={
+                  Object {
+                    "objectFit": "cover",
+                  }
+                }
+                width="280px"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
-            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
+              href="/film/54585444"
+              onClick={[Function]}
             >
               Shutter Island
             </a>
@@ -417,23 +428,34 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/4587653"
+            onClick={[Function]}
           >
-            <video
-              autoPlay={false}
-              controls={false}
-              height="175px"
-              muted={true}
-              width="280px"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                autoPlay={false}
+                controls={false}
+                height="175px"
+                muted={true}
+                style={
+                  Object {
+                    "objectFit": "cover",
+                  }
+                }
+                width="280px"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
-            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
+              href="/film/4587653"
+              onClick={[Function]}
             >
               Pulp Fiction
             </a>
@@ -444,23 +466,34 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/54546847"
+            onClick={[Function]}
           >
-            <video
-              autoPlay={false}
-              controls={false}
-              height="175px"
-              muted={true}
-              width="280px"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                autoPlay={false}
+                controls={false}
+                height="175px"
+                muted={true}
+                style={
+                  Object {
+                    "objectFit": "cover",
+                  }
+                }
+                width="280px"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
-            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
+              href="/film/54546847"
+              onClick={[Function]}
             >
               Snatch
             </a>
@@ -471,23 +504,34 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/54545454545"
+            onClick={[Function]}
           >
-            <video
-              autoPlay={false}
-              controls={false}
-              height="175px"
-              muted={true}
-              width="280px"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                autoPlay={false}
+                controls={false}
+                height="175px"
+                muted={true}
+                style={
+                  Object {
+                    "objectFit": "cover",
+                  }
+                }
+                width="280px"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
-            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
+              href="/film/54545454545"
+              onClick={[Function]}
             >
               Bohemian Rhapsody
             </a>
@@ -498,23 +542,34 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/549963331"
+            onClick={[Function]}
           >
-            <video
-              autoPlay={false}
-              controls={false}
-              height="175px"
-              muted={true}
-              width="280px"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                autoPlay={false}
+                controls={false}
+                height="175px"
+                muted={true}
+                style={
+                  Object {
+                    "objectFit": "cover",
+                  }
+                }
+                width="280px"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
-            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
+              href="/film/549963331"
+              onClick={[Function]}
             >
               Aviator
             </a>

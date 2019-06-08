@@ -19,6 +19,13 @@ const filmsMock = [
     src: `video.mp4`
   }
 ];
+const reviewsMock = [{
+  id: 1,
+  comment: `This movie is awesome`,
+  user: {id: 4, name: `Sam`},
+  rating: 8.5,
+  date: `2019-06-08T13:25:17.586Z`
+}];
 const initialStateMock = {
   activeGenre: null,
   movies: [],
@@ -66,6 +73,38 @@ describe(`Data reducer works correctly`, () => {
       genres,
       activeGenre: null,
       movies: filmsMock,
+    });
+  });
+
+  test(`Should set reviews`, () => {
+    const state = {
+      genres,
+      activeGenre: null,
+      movies: [],
+      reviews: []
+    };
+    const action = {type: ActionType.SET_REVIEWS, payload: reviewsMock};
+    expect(reducer(state, action)).toEqual({
+      genres,
+      activeGenre: state.activeGenre,
+      movies: state.movies,
+      reviews: reviewsMock
+    });
+  });
+
+  test(`Should clear reviews`, () => {
+    const state = {
+      genres,
+      activeGenre: null,
+      movies: [],
+      reviews: reviewsMock
+    };
+    const action = {type: ActionType.CLEAR_REVIEWS};
+    expect(reducer(state, action)).toEqual({
+      genres,
+      activeGenre: state.activeGenre,
+      movies: state.movies,
+      reviews: []
     });
   });
 });

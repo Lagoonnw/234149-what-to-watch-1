@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {VideoPlayer} from './video-player.jsx';
+import {Video} from './video.jsx';
 import {createNodeMock} from '../../__mock__/createMockNode';
 
 describe(`Video player snapshot`, () => {
@@ -8,7 +8,7 @@ describe(`Video player snapshot`, () => {
     const options = {createNodeMock};
     const ref = React.createRef();
     const tree = renderer.create(
-        <VideoPlayer
+        <Video
           poster={`pic.jpg`}
           src={`video.mp4`}
           reference={ref}/>, options).toJSON();

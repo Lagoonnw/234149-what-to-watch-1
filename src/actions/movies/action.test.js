@@ -24,4 +24,24 @@ describe(`Operation works correctlly`, ()=> {
         });
       });
   });
+
+  test(`Should make a correct API call to /reviews`, () => {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const reviewsLoader = moviesAction.loadReviews(56);
+
+    apiMock
+      .onGet(`${APIEndpoints.REVIEWS}56`)
+      .reply(200, [{fake: true}]);
+
+    return reviewsLoader(dispatch, jest.fn(), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_REVIEWS,
+          payload: [{fake: true}],
+        });
+      });
+  });
 });

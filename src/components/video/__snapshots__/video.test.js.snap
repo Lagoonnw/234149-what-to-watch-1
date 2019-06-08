@@ -8,6 +8,11 @@ exports[`Video player snapshot Should render video player correctly 1`] = `
   muted={false}
   poster="pic.jpg"
   src="video.mp4"
+  style={
+    Object {
+      "objectFit": "cover",
+    }
+  }
   width="280px"
 />
 `;

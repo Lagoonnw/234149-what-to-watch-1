@@ -4,13 +4,14 @@ import Header from '../header/header.jsx';
 import {MoviesList} from '../movies-list/movies-list.jsx';
 import MoviesFilter from '../movies-filter/movies-filter.jsx';
 import {withActiveItem} from '../../hocs/with-active-item/with-active-item.jsx';
-import {getFilteredMovies} from "../../reducers/movies/selectors";
-import {connect} from "react-redux";
+import {getFilteredMovies} from '../../reducers/movies/selectors';
+import {connect} from 'react-redux';
 
 const MoviesListWithActiveItem = withActiveItem(MoviesList);
 const MoviesFilterWithActiveItem = withActiveItem(MoviesFilter);
 
 export const MainScreen = ({movies}) => {
+
   return (<Fragment>
     <div className="visually-hidden">
       <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -101,7 +102,7 @@ export const MainScreen = ({movies}) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <MoviesFilterWithActiveItem/>
-        <MoviesListWithActiveItem movies={movies}/>
+        <MoviesListWithActiveItem movies={movies} />
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
         </div>

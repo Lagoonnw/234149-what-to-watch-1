@@ -2,6 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {MoviesList} from './movies-list';
 import {createNodeMock} from '../../__mock__/createMockNode';
+import {ProviderMock} from '../../__mock__/providerMock.jsx';
 
 const mock = [
   {
@@ -34,12 +35,14 @@ describe(`MoviesList render`, () => {
     const onMouseEnter = jest.fn();
     const onMouseLeave = jest.fn();
     const tree = renderer.create(
-        <MoviesList
-          movies={mock}
-          onClick={onClick}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        />, options
+        <ProviderMock>
+          <MoviesList
+            movies={mock}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          />
+        </ProviderMock>, options
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
