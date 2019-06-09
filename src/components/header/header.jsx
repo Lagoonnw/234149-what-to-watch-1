@@ -9,7 +9,8 @@ export const Header = (props) => {
   const {
     shouldShowAvatar,
     userPic,
-    className
+    className,
+    breadcrumbs
   } = props;
 
   return (
@@ -21,6 +22,17 @@ export const Header = (props) => {
           <span className="logo__letter logo__letter--3">W</span>
         </Link>
       </div>
+
+      {breadcrumbs.length > 0 && <nav className="breadcrumbs">
+        <ul className="breadcrumbs__list">
+          <li className="breadcrumbs__item">
+            <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+          </li>
+          <li className="breadcrumbs__item">
+            <a className="breadcrumbs__link">Add review</a>
+          </li>
+        </ul>
+      </nav>}
 
       <div className="user-block">
         {shouldShowAvatar && <div className="user-block__avatar">
@@ -38,12 +50,14 @@ Header.propTypes = {
   shouldShowAvatar: PropTypes.bool,
   userPic: PropTypes.string,
   isAuthorizationRequired: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  breadcrumbs: PropTypes.arrayOf(PropTypes.string)
 };
 
 Header.defaultProps = {
   shouldShowAvatar: false,
-  isAuthorizationRequired: false
+  isAuthorizationRequired: false,
+  breadcrumbs: []
 };
 
 const mapStateToProps = (state, ownProps) => {

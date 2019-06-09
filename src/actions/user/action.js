@@ -1,6 +1,6 @@
-import {createAction} from '../../helpers/create-action/create-action';
-import {APIEndpoints} from '../../constants/constants';
-import {convertObjectKeysToCamel} from '../../helpers/convert-object-keys-to-camel-case/convert-object-keys-to-camel-case';
+import {createAction}                   from '../../helpers/create-action/create-action';
+import {APIEndpoints, FavoritesRequest} from '../../constants/constants';
+import {convertObjectKeysToCamel}       from '../../helpers/convert-object-keys-to-camel-case/convert-object-keys-to-camel-case';
 
 export const ActionType = {
   SET_AUTH_STATUS: `SET_AUTH_STATUS`,
@@ -8,7 +8,8 @@ export const ActionType = {
   LOGIN: `LOGIN`,
   SET_AUTH_FAILED: `SET_AUTH_FAILED`,
   SET_FAVORITES: `SET_FAVORITES`,
-  CHECK_AUTH: `CHECK_AUTH`
+  CHECK_AUTH: `CHECK_AUTH`,
+  SAVE_TO_FAVORITE: `SAVE_TO_FAVORITE`
 };
 
 export const userAction = {
@@ -35,5 +36,8 @@ export const userAction = {
         dispatch(userAction.setProfile(convertObjectKeysToCamel(response.data)));
         dispatch(userAction.setAuthStatus(false));
       });
+  },
+  saveMovieToFavorite: (id) => (dispatch, _getState, api) => {
+    return api.post(`${APIEndpoints.FAVORITE}/${id}/${FavoritesRequest.ADD}`);
   }
 };

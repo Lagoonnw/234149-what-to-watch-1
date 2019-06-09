@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
+import {Link} from 'react-router-dom';
 
-export const FilmHero = ({backgroundImage, name, genre, released, id, onPlayClick}) => {
+export const FilmHero = ({backgroundImage, name, genre, released, id, onPlayClick, saveMovieToFavorite, history}) => {
   const onClick = () => onPlayClick(id);
+  const onAddBtnClick = () => {
+    saveMovieToFavorite(id);
+    history.push(`/favorites`);
+  };
 
 
   return (
@@ -30,13 +35,13 @@ export const FilmHero = ({backgroundImage, name, genre, released, id, onPlayClic
               </svg>
               <span>Play</span>
             </button>
-            <button className="btn btn--list movie-card__button" type="button">
+            <button className="btn btn--list movie-card__button" type="button" onClick={onAddBtnClick}>
               <svg viewBox="0 0 19 20" width="19" height="20">
                 <use xlinkHref="#add"></use>
               </svg>
               <span>My list</span>
             </button>
-            <a href="add-review.html" className="btn movie-card__button">Add review</a>
+            <Link to={`/film/${id}/review`} className="btn movie-card__button">Add review</Link>
           </div>
         </div>
       </div>
@@ -50,5 +55,7 @@ FilmHero.propTypes = {
   name: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   released: PropTypes.number.isRequired,
-  onPlayClick: PropTypes.func.isRequired
+  onPlayClick: PropTypes.func.isRequired,
+  saveMovieToFavorite: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
 };

@@ -1,35 +1,13 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
+import Header from '../header/header.jsx';
 import {connect} from 'react-redux';
-import {getCurrentMovie} from '../../reducers/movies/selectors';
-import {FilmOverview} from '../film-overview/film-overview.jsx';
-import {FilmDetails} from '../film-details/film-details.jsx';
-import {FilmCardNavigation} from '../film-card-navigation/film-card-navigation.jsx';
-import {Reviews} from '../reviews/reviews.jsx';
-import {FilmHero} from '../film-hero/film-hero.jsx';
-import withLoadingReviews from '../../hocs/with-loading-reviews/with-loading-reviews.jsx';
-import {withActiveItem} from '../../hocs/with-active-item/with-active-item.jsx';
-import MoreLikeThis from '../more-like-this/more-like-this.jsx';
+import {getPromoMovie} from '../../reducers/movies/selectors';
 import {playerAction} from '../../actions/player/action';
-import VideoPlayer from '../video-player/video-player.jsx';
-import {getPlayingStatus} from '../../reducers/player/selector';
-import {withFullScreen} from '../../hocs/with-full-screen/with-full-screen.jsx';
-import {userAction} from '../../actions/user/action';
 
-const FilmReviews = withLoadingReviews(Reviews);
-const MoreLikeThisWithActiveItem = withActiveItem(MoreLikeThis);
-const VideoPlayerWithFullScreen = withFullScreen(VideoPlayer);
-
-export const FilmCard = ({movie, onClick, activeItem, startPlay, isPlayerOn, saveMovieToFavorite, history}) => {
-  if (!movie) {
-    return <div>Loading...</div>;
-  }
-  if (isPlayerOn) {
-    return <VideoPlayerWithFullScreen/>;
-  }
-
-  const {id, name, genre, released, posterImage, backgroundColor, backgroundImage} = movie;
-  const activeTab = (!activeItem) ? `Overview` : activeItem;
+export const PromoMovie = ({movie, startPlay}) => {
+  const {id, name, genre, released, posterImage, backgroundImage} = movie;
+  const _startPlay = () => startPlay(id);
 
   return (
     <Fragment>
@@ -75,45 +53,51 @@ export const FilmCard = ({movie, onClick, activeItem, startPlay, isPlayerOn, sav
           </symbol>
         </svg>
       </div>
-      <section className="movie-card movie-card--full" style={{backgroundColor}}>
-        <FilmHero
-          genre={genre}
-          name={name}
-          backgroundImage={backgroundImage}
-          released={released}
-          onPlayClick={startPlay}
-          saveMovieToFavorite={saveMovieToFavorite}
-          id={id}
-          history={history}
-        />
-        <div className="movie-card__wrap movie-card__translate-top">
+      <section className="movie-card">
+        <div className="movie-card__bg">
+          <img src={backgroundImage} alt={name}/>
+        </div>
+
+        <h1 className="visually-hidden">WTW</h1>
+
+        <Header/>
+
+        <div className="movie-card__wrap">
           <div className="movie-card__info">
-            <div className="movie-card__poster movie-card__poster--big">
-              <img src={posterImage} alt={name} width="218"
-                height="327"/>
+            <div className="movie-card__poster">
+              <img src={posterImage} alt={name} width="218" height="327"/>
             </div>
 
-            <div className="movie-card__desc" >
-              <FilmCardNavigation onClick={onClick} activeTab={activeTab}/>
-              {activeTab === `Overview` && <FilmOverview {...movie}/>}
-              {activeTab === `Details` && <FilmDetails {...movie}/>}
-              {activeTab === `Reviews` && <FilmReviews id={id}/>}
+            <div className="movie-card__desc">
+              <h2 className="movie-card__title">{name}</h2>
+              <p className="movie-card__meta">
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{released}</span>
+              </p>
+
+              <div className="movie-card__buttons">
+                <button className="btn btn--play movie-card__button" type="button" onClick={_startPlay}>
+                  <svg viewBox="0 0 19 19" width="19" height="19">
+                    <use xlinkHref="#play-s"></use>
+                  </svg>
+                  <span>Play</span>
+                </button>
+                <button className="btn btn--list movie-card__button" type="button">
+                  <svg viewBox="0 0 19 20" width="19" height="20">
+                    <use xlinkHref="#add"></use>
+                  </svg>
+                  <span>My list</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
-          <MoreLikeThisWithActiveItem genre={genre} id={id}/>
-        </section>
-      </div>
     </Fragment>
   );
 };
 
-FilmCard.propTypes = {
+PromoMovie.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -133,26 +117,15 @@ FilmCard.propTypes = {
     released: PropTypes.number,
     isFavorite: PropTypes.bool
   }),
-  onClick: PropTypes.func.isRequired,
-  activeItem: PropTypes.string,
-  isPlayerOn: PropTypes.bool,
-  startPlay: PropTypes.func.isRequired,
-  saveMovieToFavorite: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  startPlay: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const {match: {params: {id}}} = ownProps;
-
-  return Object.assign({}, ownProps, {
-    movie: getCurrentMovie(state, parseInt(id, 10)),
-    isPlayerOn: getPlayingStatus(state)
-  });
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  startPlay: (movieId) => dispatch(playerAction.startPlay(movieId)),
-  saveMovieToFavorite: (id) => dispatch(userAction.saveMovieToFavorite(id))
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  movie: getPromoMovie(state)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilmCard);
+const mapDispatchToProps = (dispatch) => ({
+  startPlay: (movieId) => dispatch(playerAction.startPlay(movieId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PromoMovie);

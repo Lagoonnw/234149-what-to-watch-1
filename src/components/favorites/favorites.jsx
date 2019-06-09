@@ -20,12 +20,9 @@ export class Favorites extends PureComponent {
     return (
       <div className="user-page">
         <Header className="user-page__head"/>
-        <section className="catalog">
+        <section className="catalog" style={{marginLeft: `16px`, marginRight: `16px`}}>
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <div className="catalog__movies-list">
-            <MoviesListWithActiveItem movies={movies}/>
-          </div>
+          <MoviesListWithActiveItem movies={movies}/>
         </section>
       </div>
     );

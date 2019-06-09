@@ -1,5 +1,6 @@
 export const VIDEO_PLAY_DELAY_TIME = 1000;
 export const MORE_LIKE_THIS_NUMBER = 4;
+export const BLACK_COLOR = `000000`;
 export const API_BASE_URL = `https://es31-server.appspot.com/wtw`;
 export const BASE_URL = `https://es31-server.appspot.com`;
 
@@ -36,7 +37,8 @@ export const APIEndpoints = {
   FILMS: `/films`,
   LOGIN: `/login`,
   FAVORITE: `/favorite`,
-  REVIEWS: `/comments/`
+  REVIEWS: `/comments/`,
+  PROMO: `/films/promo`
 };
 
 export const ResponseStatus = {
@@ -58,4 +60,9 @@ export const Raiting = {
   GOOD: `Good`,
   VERY_GOOD: `Very good`,
   AWESOME: `Awesome`
+};
+
+export const FavoritesRequest = {
+  ADD: 1,
+  REMOVE: 0
 };

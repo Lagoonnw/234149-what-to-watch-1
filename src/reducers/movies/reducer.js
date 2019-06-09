@@ -5,6 +5,7 @@ const initialState = {
   activeGenre: null,
   movies: [],
   reviews: [],
+  promoMovie: {},
   genres: Array.from(genresList)
 };
 
@@ -29,6 +30,10 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CLEAR_REVIEWS:
       return Object.assign({}, state, {
         reviews: []
+      });
+    case ActionType.SET_PROMO_MOVIE:
+      return Object.assign({}, state, {
+        promoMovie: action.payload
       });
   }
 

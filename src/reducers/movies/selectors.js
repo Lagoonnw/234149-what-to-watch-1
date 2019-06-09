@@ -30,3 +30,7 @@ export const getMoreLikeThis = (state, genre, id) => {
   return filterMovies(movies, genre).filter((movie) => movie.id !== id).splice(0, MORE_LIKE_THIS_NUMBER);
 };
 
+export const getPromoMovie = (state) => state[NameSpaces.MOVIES].promoMovie;
+
+export const getBackgroundForMainPage = (state) => state[NameSpaces.MOVIES].promoMovie.backgroundColor;
+
