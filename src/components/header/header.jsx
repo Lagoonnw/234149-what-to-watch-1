@@ -23,7 +23,7 @@ export const Header = (props) => {
         </Link>
       </div>
 
-      {breadcrumbs.length > 0 && <nav className="breadcrumbs">
+      {breadcrumbs.minMax > 0 && <nav className="breadcrumbs">
         <ul className="breadcrumbs__list">
           <li className="breadcrumbs__item">
             <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
@@ -36,7 +36,7 @@ export const Header = (props) => {
 
       <div className="user-block">
         {shouldShowAvatar && <div className="user-block__avatar">
-          <Link to="/favorites">
+          <Link to="/myList">
             <img src={userPic} alt="User avatar" width="63" height="63"/>
           </Link>
         </div>}

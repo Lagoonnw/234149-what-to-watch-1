@@ -3,19 +3,21 @@ import PropTypes from 'prop-types';
 import {MoviesList} from '../movies-list/movies-list.jsx';
 import MoviesFilter from '../movies-filter/movies-filter.jsx';
 import {withActiveItem} from '../../hocs/with-active-item/with-active-item.jsx';
-import {getFilteredMovies, getBackgroundForMainPage} from '../../reducers/movies/selectors';
+import {getBackgroundForMainPage} from '../../reducers/movies/selectors';
 import {connect} from 'react-redux';
 import PromoMovie from '../promo-movie/promo-movie.jsx';
 import {withFullScreen} from '../../hocs/with-full-screen/with-full-screen.jsx';
 import VideoPlayer from '../video-player/video-player.jsx';
 import {getPlayingStatus} from '../../reducers/player/selector';
 import {BLACK_COLOR} from '../../constants/constants';
+import withLimitArray from '../../hocs/with-limit-array/with-limit-array.jsx';
 
 const MoviesListWithActiveItem = withActiveItem(MoviesList);
 const MoviesFilterWithActiveItem = withActiveItem(MoviesFilter);
+const MoviesWithLimitArray = withLimitArray(MoviesListWithActiveItem);
 const VideoPlayerWithFullScreen = withFullScreen(VideoPlayer);
 
-export const MainScreen = ({movies, isPlayerOn = false, background = BLACK_COLOR}) => {
+export const MainScreen = ({isPlayerOn = false, background = BLACK_COLOR}) => {
   if (isPlayerOn) {
     return <VideoPlayerWithFullScreen/>;
   }
@@ -25,12 +27,8 @@ export const MainScreen = ({movies, isPlayerOn = false, background = BLACK_COLOR
     <div className="page-content" style={{background}}>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-
         <MoviesFilterWithActiveItem/>
-        <MoviesListWithActiveItem movies={movies} />
-        <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
-        </div>
+        <MoviesWithLimitArray />
       </section>
 
       <footer className="page-footer">
@@ -51,13 +49,11 @@ export const MainScreen = ({movies, isPlayerOn = false, background = BLACK_COLOR
 };
 
 MainScreen.propTypes = {
-  movies: PropTypes.array.isRequired,
   isPlayerOn: PropTypes.bool,
   background: PropTypes.string
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  movies: getFilteredMovies(state),
   isPlayerOn: getPlayingStatus(state),
   background: getBackgroundForMainPage(state)
 });

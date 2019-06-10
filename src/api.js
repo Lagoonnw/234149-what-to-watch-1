@@ -15,7 +15,6 @@ export const createAPI = (dispatch) => {
   const onFail = (err) => {
     if (err.response.status === ResponseStatus.FORBIDDEN) {
       dispatch(userAction.setAuthStatus(true));
-      history.pushState(null, null, `/login`);
     }
     if (err.response.status === ResponseStatus.BAD_REQUEST) {
       dispatch(userAction.setAuthFailed(true));

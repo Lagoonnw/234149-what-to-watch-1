@@ -7,7 +7,7 @@ export const FilmHero = ({backgroundImage, name, genre, released, id, onPlayClic
   const onClick = () => onPlayClick(id);
   const onAddBtnClick = () => {
     saveMovieToFavorite(id);
-    history.push(`/favorites`);
+    history.push(`/myList`);
   };
 
 

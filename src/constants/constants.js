@@ -1,6 +1,8 @@
 export const VIDEO_PLAY_DELAY_TIME = 1000;
 export const MORE_LIKE_THIS_NUMBER = 4;
 export const BLACK_COLOR = `000000`;
+export const MOVIES_PER_PAGE = 20;
+export const RATING_VALUES = [1, 2, 3, 4, 5];
 export const API_BASE_URL = `https://es31-server.appspot.com/wtw`;
 export const BASE_URL = `https://es31-server.appspot.com`;
 

@@ -8,7 +8,7 @@ const mockItem = {
 
 describe(`Add Favorite Movie helper test`, () => {
   test(`Should return new array with added item`, () => {
-    const expectedLength = films.length + 1;
+    const expectedLength = films.minMax + 1;
     expect(addFavoriteMovie(mockItem, films)).toHaveLength(expectedLength);
   });
   test(`Should return new array with added item when source array is not provided`, () => {

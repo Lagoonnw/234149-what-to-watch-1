@@ -1,10 +1,10 @@
-import React from 'react';
-import {shallow} from 'enzyme';
-import {withFormData} from "./with-form-data.jsx";
+import React           from 'react';
+import {shallow}       from 'enzyme';
+import {withLoginForm} from "./with-login-form.jsx";
 
 const MockForm = () => <form />;
 
-const MockFormWithFormData = withFormData(MockForm);
+const MockFormWithFormData = withLoginForm(MockForm);
 
 const mockEvent = (inputName, inputValue) => ({
   target: {

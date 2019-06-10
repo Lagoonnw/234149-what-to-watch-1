@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {MovieCard} from '../movie-card/movie-card.jsx';
 import {VIDEO_PLAY_DELAY_TIME} from '../../constants/constants';
@@ -9,7 +9,9 @@ export const MoviesList = (props) => {
     onClick,
     activeItem,
     onMouseEnter,
-    onMouseLeave
+    onMouseLeave,
+    onShowMoreBtnClick,
+    shouldShowBtn
   } = props;
 
   const _getMovie = (movie) => {
@@ -40,20 +42,46 @@ export const MoviesList = (props) => {
   };
 
   return (
-    <div className="catalog__movies-list">
-      {movies.map((movie) => _getMovie(movie))}
-    </div>
+    <Fragment>
+      <div className="catalog__movies-list">
+        {movies.map((movie) => _getMovie(movie))}
+      </div>
+      {shouldShowBtn && <div className="catalog__more">
+        <button className="catalog__button" type="button" onClick={onShowMoreBtnClick}>Show more</button>
+      </div>}
+    </Fragment>
   );
 };
 
 MoviesList.propTypes = {
-  movies: PropTypes.array.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    posterImage: PropTypes.string,
+    previewImage: PropTypes.string,
+    backgroundImage: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    videoLink: PropTypes.string,
+    previewVideoLink: PropTypes.string,
+    description: PropTypes.string,
+    rating: PropTypes.number,
+    scoresCount: PropTypes.number,
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number,
+    genre: PropTypes.string,
+    released: PropTypes.number,
+    isFavorite: PropTypes.bool
+  })).isRequired,
   onClick: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
-  activeItem: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
+  activeItem: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  shouldShowBtn: PropTypes.bool,
+  onShowMoreBtnClick: PropTypes.func
 };
 
 MoviesList.defaultProps = {
-  activeItem: null
+  activeItem: null,
+  shouldShowBtn: false
 };

@@ -3,7 +3,7 @@ import {validator} from '../../helpers/validators/validators';
 import PropTypes from 'prop-types';
 import {makeObjectWithKeysFromArray} from '../../helpers/make-object-keys-from-array/make-object-keys-from-array';
 
-export const withFormData = (Component) => {
+export const withLoginForm = (Component) => {
   class WithFormData extends PureComponent {
     constructor(props) {
       super(props);

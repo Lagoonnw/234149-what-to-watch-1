@@ -1,10 +1,10 @@
-import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import React, {Fragment}     from 'react';
+import PropTypes             from 'prop-types';
+import {connect}             from 'react-redux';
 import {getAuthFailedStatus} from '../../reducers/user/selectors';
-import {userAction} from '../../actions/user/action';
-import {withFormData} from '../../hocs/with-form-data/with-form-data.jsx';
-import {Link} from 'react-router-dom';
+import {userAction}          from '../../actions/user/action';
+import {withLoginForm}       from '../../hocs/with-login-form/with-login-form.jsx';
+import {Link}                from 'react-router-dom';
 
 export const SignIn = ({onSubmit, onChange, fieldValidity, fieldTouched, authFailed = false}) => (
   <Fragment>
@@ -77,4 +77,4 @@ const mapDispatchToProps = (dispatch) => ({
   login: (data) => dispatch(userAction.login(data))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withFormData(SignIn));
+export default connect(mapStateToProps, mapDispatchToProps)(withLoginForm(SignIn));

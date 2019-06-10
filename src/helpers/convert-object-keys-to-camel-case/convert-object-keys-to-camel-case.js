@@ -1,4 +1,7 @@
 export const convertObjectKeysToCamel = (obj) => {
+  if (!obj) {
+    return null;
+  }
   let key;
   let newKey;
   let value;

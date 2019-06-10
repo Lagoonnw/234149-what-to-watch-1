@@ -3,16 +3,17 @@ import Header            from '../header/header.jsx';
 import {connect}         from 'react-redux';
 import {getCurrentMovie} from '../../reducers/movies/selectors';
 import {moviesAction}    from "../../actions/movies/action";
+import {RATING_VALUES}   from "../../constants/constants";
 
-export const AddReview = ({movie, history}) => {
+export const AddReview = ({movie, onTextareaChange,onRadioChange, rating, disabled, onSubmit, history}) => {
   console.log(``, movie);
   if (!movie) {
     return <div>Loading...</div>;
   }
   const {id, name, posterImage, backgroundImage, backgroundColor} = movie;
-  const onSubmit = () => {
-    addReview(id, data)
-  };
+  // const onSubmit = () => {
+  //   addReview(id, data)
+  // };
   return (
     <Fragment>
       <div className="visually-hidden">
@@ -74,31 +75,38 @@ export const AddReview = ({movie, history}) => {
         </div>
 
         <div className="add-review">
-          <form action="#" className="add-review__form" style={{backgroundColor}}>
+          <form onSubmit={onSubmit} className="add-review__form" style={{backgroundColor}}>
             <div className="rating">
               <div className="rating__stars">
-                <input className="rating__input" id="star-1" type="radio" name="rating" value="1"/>
-                <label className="rating__label" htmlFor="star-1">Rating 1</label>
-
-                <input className="rating__input" id="star-2" type="radio" name="rating" value="2"/>
-                <label className="rating__label" htmlFor="star-2">Rating 2</label>
-
-                <input className="rating__input" id="star-3" type="radio" name="rating" value="3" checked/>
-                <label className="rating__label" htmlFor="star-3">Rating 3</label>
-
-                <input className="rating__input" id="star-4" type="radio" name="rating" value="4"/>
-                <label className="rating__label" htmlFor="star-4">Rating 4</label>
-
-                <input className="rating__input" id="star-5" type="radio" name="rating" value="5"/>
-                <label className="rating__label" htmlFor="star-5">Rating 5</label>
+                {RATING_VALUES.map((value) => (
+                  <Fragment key={`rating-${value}`}>
+                    <input
+                      className="rating__input"
+                      id={`star-${value}`}
+                      type="radio"
+                      name="rating"
+                      value={value}
+                      onChange={onRadioChange}
+                      checked={rating === value}
+                    />
+                    <label className="rating__label" htmlFor={`star-${value}`}>{`Rating ${value}`}</label>
+                  </Fragment>
+                ))}
               </div>
             </div>
 
             <div className="add-review__text" style={{backgroundColor, filter: `sepia(20%)`}}>
               <textarea className="add-review__textarea" name="review-text" id="review-text"
-                placeholder="Review text"/>
+                placeholder="Review text" aria-multiline={true} onChange={onTextareaChange}/>
               <div className="add-review__submit">
-                <button className="add-review__btn" type="submit" style={{color: `rgba(56,44,42,.7)`}}>Post</button>
+                <button
+                  className="add-review__btn"
+                  type="submit"
+                  style={{color: `rgba(56,44,42,.7)`}}
+                  disabled={disabled}
+                >
+                  Post
+                </button>
               </div>
 
             </div>
@@ -110,18 +118,5 @@ export const AddReview = ({movie, history}) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const {match: {params: {id}}} = ownProps;
-
-  return Object.assign({}, ownProps, {
-    movie: getCurrentMovie(state, parseInt(id, 10))
-  });
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  addReview: (id) => dispatch(moviesAction.addReview(id))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
 
 

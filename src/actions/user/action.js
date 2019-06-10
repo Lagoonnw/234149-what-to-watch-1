@@ -20,8 +20,10 @@ export const userAction = {
   login: (data) => (dispatch, _getState, api) => {
     return api.post(APIEndpoints.LOGIN, data)
     .then((response) => {
-      dispatch(userAction.setProfile(convertObjectKeysToCamel(response.data)));
-      dispatch(userAction.setAuthStatus(false));
+      if (response.data) {
+        dispatch(userAction.setProfile(convertObjectKeysToCamel(response.data)));
+        dispatch(userAction.setAuthStatus(false));
+      }
     });
   },
   loadFavoriteMovies: () => (dispatch, _getState, api) => {
@@ -33,9 +35,12 @@ export const userAction = {
   checkUserAuth: () => (dispatch, _getState, api) => {
     return api.get(APIEndpoints.LOGIN)
       .then((response) => {
-        dispatch(userAction.setProfile(convertObjectKeysToCamel(response.data)));
-        dispatch(userAction.setAuthStatus(false));
-      });
+        if (response.data) {
+          dispatch(userAction.setProfile(convertObjectKeysToCamel(response.data)));
+          dispatch(userAction.setAuthStatus(false));
+        }
+      })
+      .catch(() => dispatch(userAction.setAuthStatus(true)));
   },
   saveMovieToFavorite: (id) => (dispatch, _getState, api) => {
     return api.post(`${APIEndpoints.FAVORITE}/${id}/${FavoritesRequest.ADD}`);

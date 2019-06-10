@@ -39,7 +39,7 @@ export const moviesAction = {
         dispatch(moviesAction.setPromoMovie(convertObjectKeysToCamel(response.data)));
       });
   },
-  addReview: (id) => (dispatch, _getState, api) => {
-    return api.post(`${APIEndpoints.REVIEWS}/${id}`);
+  addReview: (id, data) => (dispatch, _getState, api) => {
+    return api.post(`${APIEndpoints.REVIEWS}${id}`, data);
   }
 };
