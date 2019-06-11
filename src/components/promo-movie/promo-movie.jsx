@@ -4,10 +4,16 @@ import Header from '../header/header.jsx';
 import {connect} from 'react-redux';
 import {getPromoMovie} from '../../reducers/movies/selectors';
 import {playerAction} from '../../actions/player/action';
+import {userAction} from '../../actions/user/action';
+import {Link} from 'react-router-dom';
 
-export const PromoMovie = ({movie, startPlay}) => {
+export const PromoMovie = ({movie, startPlay, saveMovieToFavorite, history}) => {
   const {id, name, genre, released, posterImage, backgroundImage} = movie;
   const _startPlay = () => startPlay(id);
+  const _saveMovieToFavorite = () => {
+    saveMovieToFavorite(id);
+    history.push(`/myList`);
+  };
 
   return (
     <Fragment>
@@ -19,7 +25,6 @@ export const PromoMovie = ({movie, startPlay}) => {
             <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <polygon id="+" fill="#EEE5B5"
                 points="10.777832 11.2880859 10.777832 19.5527344 8.41650391 19.5527344 8.41650391 11.2880859 0.627929688 11.2880859 0.627929688 8.92675781 8.41650391 8.92675781 8.41650391 0.662109375 10.777832 0.662109375 10.777832 8.92675781 18.5664062 8.92675781 18.5664062 11.2880859"/>
-
             </g>
           </symbol>
           <symbol id="full-screen" viewBox="0 0 27 27">
@@ -57,17 +62,13 @@ export const PromoMovie = ({movie, startPlay}) => {
         <div className="movie-card__bg">
           <img src={backgroundImage} alt={name}/>
         </div>
-
         <h1 className="visually-hidden">WTW</h1>
-
         <Header/>
-
         <div className="movie-card__wrap">
           <div className="movie-card__info">
-            <div className="movie-card__poster">
+            <Link to={`/film/${movie.id}`} className="movie-card__poster">
               <img src={posterImage} alt={name} width="218" height="327"/>
-            </div>
-
+            </Link>
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
@@ -82,7 +83,7 @@ export const PromoMovie = ({movie, startPlay}) => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
+                <button className="btn btn--list movie-card__button" type="button" onClick={_saveMovieToFavorite}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
@@ -117,7 +118,9 @@ PromoMovie.propTypes = {
     released: PropTypes.number,
     isFavorite: PropTypes.bool
   }),
-  startPlay: PropTypes.func.isRequired
+  startPlay: PropTypes.func.isRequired,
+  saveMovieToFavorite: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -125,7 +128,8 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  startPlay: (movieId) => dispatch(playerAction.startPlay(movieId))
+  startPlay: (movieId) => dispatch(playerAction.startPlay(movieId)),
+  saveMovieToFavorite: (movieId) => dispatch(userAction.saveMovieToFavorite(movieId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PromoMovie);

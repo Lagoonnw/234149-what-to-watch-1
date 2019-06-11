@@ -1,10 +1,10 @@
 import React, {PureComponent} from 'react';
-import PropTypes              from 'prop-types';
-import {limitArray}           from '../../helpers/limit-array/limit-array';
-import {connect}              from 'react-redux';
-import {compose}              from 'recompose';
-import {getFilteredMovies}    from '../../reducers/movies/selectors';
-import {MOVIES_PER_PAGE}      from "../../constants/constants";
+import PropTypes from 'prop-types';
+import {limitArray} from '../../helpers/limit-array/limit-array';
+import {connect} from 'react-redux';
+import {compose} from 'recompose';
+import {getFilteredMovies} from '../../reducers/movies/selectors';
+import {MOVIES_PER_PAGE} from '../../constants/constants';
 
 export const withLimitArray = (Component) => {
   class WithLimitArray extends PureComponent {

@@ -6,16 +6,24 @@ import {connect} from 'react-redux';
 import {compose} from 'recompose';
 
 export const withPrivateRoute = (Component) => {
-  return function WithPrivateRoute(props) {
-    if (props.isAuthorizationRequired) {
+  const WithPrivateRoute = (props) => {
+    const {isAuthorizationRequired, match: {path}} = props;
+
+    if (!isAuthorizationRequired && path === `/login`) {
+      return <Redirect to="/"/>;
+    }
+    if (props.isAuthorizationRequired && path !== `/login`) {
       return <Redirect to="/login"/>;
     }
-    WithPrivateRoute.propTypes = {
-      isAuthorizationRequired: PropTypes.bool.isRequired
-    };
 
     return <Component {...props}/>;
   };
+
+  WithPrivateRoute.propTypes = {
+    isAuthorizationRequired: PropTypes.bool.isRequired,
+    match: PropTypes.object.isRequired
+  };
+  return WithPrivateRoute;
 };
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   isAuthorizationRequired: getAuthStatus(state)

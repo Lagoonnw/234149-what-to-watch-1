@@ -3,7 +3,6 @@ import {ActionType} from '../../actions/user/action';
 
 const initialStateMock = {
   isAuthorizationRequired: false,
-  authFailed: false,
   favorites: [],
   profile: null
 };
@@ -27,18 +26,6 @@ describe(`User reducer should work correctly`, () => {
       authFailed: initialStateMock.authFailed,
       favorites: initialStateMock.favorites,
       profile: initialStateMock.profile
-    });
-  });
-
-  test(`Should set flag authFailed`, () => {
-    expect(reducer(initialStateMock, {
-      type: ActionType.SET_AUTH_FAILED,
-      payload: true
-    })).toEqual({
-      isAuthorizationRequired: initialStateMock.isAuthorizationRequired,
-      authFailed: true,
-      profile: initialStateMock.profile,
-      favorites: initialStateMock.favorites
     });
   });
 

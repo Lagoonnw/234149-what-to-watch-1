@@ -4,10 +4,14 @@ import {FilmHero} from './film-hero';
 import {ProviderMock} from '../../__mock__/providerMock';
 
 const mockProps = {
+  id: 2121,
   backgroundImage: `#F5F5F5`,
   name: `Movie`,
   genre: `Action`,
-  released: 1992
+  released: 1992,
+  onPlayClick: jest.fn(),
+  saveMovieToFavorite: jest.fn(),
+  history: {}
 };
 
 test(`Should render Film hero correctly`, () => {

@@ -17,13 +17,13 @@ const MoviesFilterWithActiveItem = withActiveItem(MoviesFilter);
 const MoviesWithLimitArray = withLimitArray(MoviesListWithActiveItem);
 const VideoPlayerWithFullScreen = withFullScreen(VideoPlayer);
 
-export const MainScreen = ({isPlayerOn = false, background = BLACK_COLOR}) => {
+export const MainScreen = ({isPlayerOn = false, background = BLACK_COLOR, history}) => {
   if (isPlayerOn) {
     return <VideoPlayerWithFullScreen/>;
   }
 
   return (<Fragment>
-    <PromoMovie/>
+    <PromoMovie history={history}/>
     <div className="page-content" style={{background}}>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -50,7 +50,8 @@ export const MainScreen = ({isPlayerOn = false, background = BLACK_COLOR}) => {
 
 MainScreen.propTypes = {
   isPlayerOn: PropTypes.bool,
-  background: PropTypes.string
+  background: PropTypes.string,
+  history: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {

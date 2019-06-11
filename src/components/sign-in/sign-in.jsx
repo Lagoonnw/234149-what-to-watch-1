@@ -1,12 +1,8 @@
-import React, {Fragment}     from 'react';
-import PropTypes             from 'prop-types';
-import {connect}             from 'react-redux';
-import {getAuthFailedStatus} from '../../reducers/user/selectors';
-import {userAction}          from '../../actions/user/action';
-import {withLoginForm}       from '../../hocs/with-login-form/with-login-form.jsx';
-import {Link}                from 'react-router-dom';
+import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
-export const SignIn = ({onSubmit, onChange, fieldValidity, fieldTouched, authFailed = false}) => (
+export const SignIn = ({onSubmit, onChange, fieldValidity, fieldTouched, submitFailed = false}) => (
   <Fragment>
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -23,7 +19,7 @@ export const SignIn = ({onSubmit, onChange, fieldValidity, fieldTouched, authFai
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form" onSubmit={onSubmit}>
-          {authFailed && <div className="sign-in__message">
+          {submitFailed && <div className="sign-in__message">
             <p>We can’t recognize this email <br/> and password combination. Please try again.</p>
           </div>}
           <div className="sign-in__fields">
@@ -66,15 +62,5 @@ SignIn.propTypes = {
   onChange: PropTypes.func.isRequired,
   fieldValidity: PropTypes.object.isRequired,
   fieldTouched: PropTypes.object.isRequired,
-  authFailed: PropTypes.bool
+  submitFailed: PropTypes.bool
 };
-
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  authFailed: getAuthFailedStatus(state)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  login: (data) => dispatch(userAction.login(data))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(withLoginForm(SignIn));

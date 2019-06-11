@@ -1,6 +1,6 @@
-import React           from 'react';
-import {shallow}       from 'enzyme';
-import {withLoginForm} from "./with-login-form.jsx";
+import React from 'react';
+import {shallow} from 'enzyme';
+import {withLoginForm} from './with-login-form.jsx';
 
 const MockForm = () => <form />;
 
@@ -24,7 +24,14 @@ const mockHistory = {
 
 describe(`WithFormData hoc test`, () => {
   test(`Should call change state on change both fields`, () => {
-    const component = shallow(<MockFormWithFormData login={mockPromise} history={mockHistory}/>);
+    const component = shallow(
+        <MockFormWithFormData
+          resetFormError={jest.fn()}
+          login={mockPromise}
+          history={mockHistory}
+          submitFailed={false}
+        />
+    );
     component.props().onChange(mockEvent(`email`, `test@test.com`));
     expect(component.state()).toEqual({
       email: `test@test.com`,
@@ -42,7 +49,14 @@ describe(`WithFormData hoc test`, () => {
   });
   test(`Should call login from props on submit`, () => {
     const spy = jest.spyOn(MockFormWithFormData.prototype, `_submitHandler`);
-    const component = shallow(<MockFormWithFormData login={mockPromise} history={mockHistory}/>);
+    const component = shallow(
+        <MockFormWithFormData
+          login={mockPromise}
+          history={mockHistory}
+          resetFormError={jest.fn()}
+          submitFailed={false}
+        />
+    );
     component.setState({
       email: `test@test.com`,
       password: `gts1258`,

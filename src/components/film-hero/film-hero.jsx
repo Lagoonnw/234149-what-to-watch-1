@@ -10,7 +10,6 @@ export const FilmHero = ({backgroundImage, name, genre, released, id, onPlayClic
     history.push(`/myList`);
   };
 
-
   return (
     <div className="movie-card__hero" >
       <div className="movie-card__bg">

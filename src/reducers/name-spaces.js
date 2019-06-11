@@ -1,5 +1,6 @@
 export const NameSpaces = {
   MOVIES: `movies`,
   USER: `user`,
-  PLAYER: `player`
+  PLAYER: `player`,
+  FORM: `form`
 };

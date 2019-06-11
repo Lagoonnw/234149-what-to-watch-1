@@ -1,19 +1,16 @@
 import React, {Fragment} from 'react';
-import Header            from '../header/header.jsx';
-import {connect}         from 'react-redux';
-import {getCurrentMovie} from '../../reducers/movies/selectors';
-import {moviesAction}    from "../../actions/movies/action";
-import {RATING_VALUES}   from "../../constants/constants";
+import PropTypes from 'prop-types';
+import Header from '../header/header.jsx';
+import {RATING_VALUES} from '../../constants/constants';
 
-export const AddReview = ({movie, onTextareaChange,onRadioChange, rating, disabled, onSubmit, history}) => {
-  console.log(``, movie);
+export const AddReview = (props) => {
+  const {movie, onTextareaChange, onRadioChange, rating, disabled, onSubmit} = props;
+
   if (!movie) {
     return <div>Loading...</div>;
   }
-  const {id, name, posterImage, backgroundImage, backgroundColor} = movie;
-  // const onSubmit = () => {
-  //   addReview(id, data)
-  // };
+  const {name, posterImage, backgroundImage, backgroundColor} = movie;
+
   return (
     <Fragment>
       <div className="visually-hidden">
@@ -66,7 +63,7 @@ export const AddReview = ({movie, onTextareaChange,onRadioChange, rating, disabl
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header/>
+          <Header {...props}/>
 
           <div className="movie-card__poster movie-card__poster--small">
             <img src={posterImage} alt={name} width="218"
@@ -108,7 +105,6 @@ export const AddReview = ({movie, onTextareaChange,onRadioChange, rating, disabl
                   Post
                 </button>
               </div>
-
             </div>
           </form>
         </div>
@@ -118,5 +114,29 @@ export const AddReview = ({movie, onTextareaChange,onRadioChange, rating, disabl
   );
 };
 
-
-
+AddReview.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    posterImage: PropTypes.string,
+    previewImage: PropTypes.string,
+    backgroundImage: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    videoLink: PropTypes.string,
+    previewVideoLink: PropTypes.string,
+    description: PropTypes.string,
+    rating: PropTypes.number,
+    scoresCount: PropTypes.number,
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number,
+    genre: PropTypes.string,
+    released: PropTypes.number,
+    isFavorite: PropTypes.bool
+  }),
+  onTextareaChange: PropTypes.func.isRequired,
+  onRadioChange: PropTypes.func.isRequired,
+  rating: PropTypes.number,
+  disabled: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired
+};

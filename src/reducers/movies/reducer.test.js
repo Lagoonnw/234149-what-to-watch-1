@@ -29,7 +29,9 @@ const reviewsMock = [{
 const initialStateMock = {
   activeGenre: null,
   movies: [],
-  genres
+  reviews: [],
+  genres,
+  promoMovie: {}
 };
 
 describe(`Data reducer works correctly`, () => {
@@ -41,7 +43,9 @@ describe(`Data reducer works correctly`, () => {
     expect(reducer(initialStateMock, action)).toEqual({
       activeGenre: null,
       movies: filmsMock,
-      genres: initialStateMock.genres
+      genres: initialStateMock.genres,
+      reviews: [],
+      promoMovie: {}
     });
   });
 
@@ -50,6 +54,8 @@ describe(`Data reducer works correctly`, () => {
       genres,
       activeGenre: null,
       movies: filmsMock,
+      reviews: [],
+      promoMovie: {}
     };
     const action = {
       type: ActionType.SORT_MOVIES,
@@ -58,7 +64,9 @@ describe(`Data reducer works correctly`, () => {
     expect(reducer(state, action)).toEqual({
       genres,
       activeGenre: `Horror`,
-      movies: filmsMock
+      movies: filmsMock,
+      reviews: [],
+      promoMovie: {}
     });
   });
 
@@ -67,12 +75,16 @@ describe(`Data reducer works correctly`, () => {
       genres,
       activeGenre: `Horror`,
       movies: filmsMock,
+      reviews: [],
+      promoMovie: {}
     };
     const action = {type: ActionType.RESET_MOVIES};
     expect(reducer(state, action)).toEqual({
       genres,
       activeGenre: null,
       movies: filmsMock,
+      reviews: [],
+      promoMovie: {}
     });
   });
 
@@ -81,14 +93,16 @@ describe(`Data reducer works correctly`, () => {
       genres,
       activeGenre: null,
       movies: [],
-      reviews: []
+      reviews: [],
+      promoMovie: {}
     };
     const action = {type: ActionType.SET_REVIEWS, payload: reviewsMock};
     expect(reducer(state, action)).toEqual({
       genres,
       activeGenre: state.activeGenre,
       movies: state.movies,
-      reviews: reviewsMock
+      reviews: reviewsMock,
+      promoMovie: {}
     });
   });
 
@@ -97,14 +111,36 @@ describe(`Data reducer works correctly`, () => {
       genres,
       activeGenre: null,
       movies: [],
-      reviews: reviewsMock
+      reviews: reviewsMock,
+      promoMovie: {}
     };
     const action = {type: ActionType.CLEAR_REVIEWS};
     expect(reducer(state, action)).toEqual({
       genres,
       activeGenre: state.activeGenre,
       movies: state.movies,
-      reviews: []
+      reviews: [],
+      promoMovie: {}
+    });
+  });
+
+  test(`Should set Promo movie`, () => {
+    const state = {
+      genres,
+      activeGenre: null,
+      movies: [],
+      reviews: reviewsMock,
+      promoMovie: {}
+    };
+    expect(reducer(state, {
+      type: ActionType.SET_PROMO_MOVIE,
+      payload: {id: 4}
+    })).toEqual({
+      genres,
+      activeGenre: null,
+      movies: [],
+      reviews: reviewsMock,
+      promoMovie: {id: 4}
     });
   });
 });

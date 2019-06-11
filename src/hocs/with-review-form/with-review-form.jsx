@@ -1,9 +1,12 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import {validator} from '../../helpers/validators/validators';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {moviesAction} from '../../actions/movies/action';
 import {getCurrentMovie} from '../../reducers/movies/selectors';
+import {getFormError} from '../../reducers/form/selector';
+import {formAction} from '../../actions/form/action';
 
 export const withReviewForm = (Component) => {
   class WithReviewForm extends PureComponent {
@@ -11,7 +14,7 @@ export const withReviewForm = (Component) => {
       super(props);
       this.state = {
         comment: ``,
-        rating: 1,
+        rating: null,
         fieldValidity: {
           textarea: false,
           radio: false
@@ -20,17 +23,20 @@ export const withReviewForm = (Component) => {
       this._textareaChangeHandler = this._textareaChangeHandler.bind(this);
       this._radioChangeHandler = this._radioChangeHandler.bind(this);
       this._submitHandler = this._submitHandler.bind(this);
+    }
 
+    componentWillUnmount() {
+      this.props.resetFormError();
     }
 
     render() {
-      const {fieldValidity: {textarea, radio}} = this.state;
+      const {fieldValidity: {textarea, radio}, submitFailed} = this.state;
       const props = Object.assign({}, this.props, {
         onTextareaChange: this._textareaChangeHandler,
         onRadioChange: this._radioChangeHandler,
         onSubmit: this._submitHandler,
         rating: this.state.rating,
-        disabled: !(textarea && radio)
+        disabled: !(textarea && radio) && !submitFailed
       });
 
       return <Component {...props}/>;
@@ -55,13 +61,45 @@ export const withReviewForm = (Component) => {
     _submitHandler(e) {
       e.preventDefault();
       const {fieldValidity: {textarea, radio}, comment, rating} = this.state;
-      const {sendReview, movie: {id}, history} = this.props;
+      const {sendReview, movie: {id}, history, submitFailed} = this.props;
+
       if (!textarea || !radio) {
         return;
       }
-      sendReview(id, {comment, rating}).then(() => history.push(`/film/${id}`));
+      sendReview(id, {comment, rating}).then(() => {
+        if (!submitFailed) {
+          history.push(`/film/${id}`);
+        }
+      });
     }
   }
+
+  WithReviewForm.propTypes = {
+    movie: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      posterImage: PropTypes.string,
+      previewImage: PropTypes.string,
+      backgroundImage: PropTypes.string,
+      backgroundColor: PropTypes.string,
+      videoLink: PropTypes.string,
+      previewVideoLink: PropTypes.string,
+      description: PropTypes.string,
+      rating: PropTypes.number,
+      scoresCount: PropTypes.number,
+      director: PropTypes.string,
+      starring: PropTypes.arrayOf(PropTypes.string),
+      runTime: PropTypes.number,
+      genre: PropTypes.string,
+      released: PropTypes.number,
+      isFavorite: PropTypes.bool
+    }),
+    submitFailed: PropTypes.bool.isRequired,
+    match: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    sendReview: PropTypes.func.isRequired,
+    resetFormError: PropTypes.func.isRequired
+  };
 
   return WithReviewForm;
 };
@@ -70,12 +108,14 @@ const mapStateToProps = (state, ownProps) => {
   const {match: {params: {id}}} = ownProps;
 
   return Object.assign({}, ownProps, {
-    movie: getCurrentMovie(state, parseInt(id, 10))
+    movie: getCurrentMovie(state, parseInt(id, 10)),
+    submitFailed: getFormError(state)
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  sendReview: (id, data) => dispatch(moviesAction.addReview(id, data))
+  sendReview: (id, data) => dispatch(moviesAction.addReview(id, data)),
+  resetFormError: () => dispatch(formAction.resetFormError())
 });
 
 export default compose(
