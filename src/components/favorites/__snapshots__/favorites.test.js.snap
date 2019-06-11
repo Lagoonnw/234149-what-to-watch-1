@@ -46,6 +46,12 @@ exports[`Favorites component snapshot test Should render Favorites correctly 1`]
   </header>
   <section
     className="catalog"
+    style={
+      Object {
+        "marginLeft": "16px",
+        "marginRight": "16px",
+      }
+    }
   >
     <h2
       className="catalog__title visually-hidden"
@@ -55,130 +61,126 @@ exports[`Favorites component snapshot test Should render Favorites correctly 1`]
     <div
       className="catalog__movies-list"
     >
-      <div
-        className="catalog__movies-list"
+      <article
+        className="small-movie-card catalog__movies-card"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+        <a
+          href="/film/54545454"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              autoPlay={false}
+              controls={false}
+              height="175px"
+              muted={true}
+              poster="pic.jpg"
+              src="video.mp4"
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              width="280px"
+            />
+          </div>
+        </a>
+        <h3
+          className="small-movie-card__title"
         >
           <a
+            className="small-movie-card__link"
             href="/film/54545454"
             onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
-            >
-              <video
-                autoPlay={false}
-                controls={false}
-                height="175px"
-                muted={true}
-                poster="pic.jpg"
-                src="video.mp4"
-                style={
-                  Object {
-                    "objectFit": "cover",
-                  }
-                }
-                width="280px"
-              />
-            </div>
+            Snatch
           </a>
-          <h3
-            className="small-movie-card__title"
+        </h3>
+      </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <a
+          href="/film/9898988"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
           >
-            <a
-              className="small-movie-card__link"
-              href="/film/54545454"
-              onClick={[Function]}
-            >
-              Snatch
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+            <video
+              autoPlay={false}
+              controls={false}
+              height="175px"
+              muted={true}
+              poster="pic.jpg"
+              src="video.mp4"
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              width="280px"
+            />
+          </div>
+        </a>
+        <h3
+          className="small-movie-card__title"
         >
           <a
+            className="small-movie-card__link"
             href="/film/9898988"
             onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
-            >
-              <video
-                autoPlay={false}
-                controls={false}
-                height="175px"
-                muted={true}
-                poster="pic.jpg"
-                src="video.mp4"
-                style={
-                  Object {
-                    "objectFit": "cover",
-                  }
-                }
-                width="280px"
-              />
-            </div>
+            Pulp Fiction
           </a>
-          <h3
-            className="small-movie-card__title"
+        </h3>
+      </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <a
+          href="/film/545468787"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
           >
-            <a
-              className="small-movie-card__link"
-              href="/film/9898988"
-              onClick={[Function]}
-            >
-              Pulp Fiction
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+            <video
+              autoPlay={false}
+              controls={false}
+              height="175px"
+              muted={true}
+              poster="pic.jpg"
+              src="video.mp4"
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              width="280px"
+            />
+          </div>
+        </a>
+        <h3
+          className="small-movie-card__title"
         >
           <a
+            className="small-movie-card__link"
             href="/film/545468787"
             onClick={[Function]}
           >
-            <div
-              className="small-movie-card__image"
-            >
-              <video
-                autoPlay={false}
-                controls={false}
-                height="175px"
-                muted={true}
-                poster="pic.jpg"
-                src="video.mp4"
-                style={
-                  Object {
-                    "objectFit": "cover",
-                  }
-                }
-                width="280px"
-              />
-            </div>
+            The Witcher
           </a>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="/film/545468787"
-              onClick={[Function]}
-            >
-              The Witcher
-            </a>
-          </h3>
-        </article>
-      </div>
+        </h3>
+      </article>
     </div>
   </section>
 </div>

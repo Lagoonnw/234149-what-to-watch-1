@@ -48,4 +48,17 @@ describe(`Operation works correctlly`, ()=> {
         });
       });
   });
+
+  test(`Should make a correct API call to /favorites/:id`, () => {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const saverMovies = userAction.saveMovieToFavorite(5);
+
+    apiMock
+      .onPost(APIEndpoints.FAVORITE)
+      .reply(200, [{fake: true}]);
+
+    return saverMovies(dispatch, jest.fn(), api);
+  });
 });

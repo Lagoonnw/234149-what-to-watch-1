@@ -14,18 +14,22 @@ import {playerAction} from '../../actions/player/action';
 import VideoPlayer from '../video-player/video-player.jsx';
 import {getPlayingStatus} from '../../reducers/player/selector';
 import {withFullScreen} from '../../hocs/with-full-screen/with-full-screen.jsx';
+import {userAction} from '../../actions/user/action';
 
 const FilmReviews = withLoadingReviews(Reviews);
 const MoreLikeThisWithActiveItem = withActiveItem(MoreLikeThis);
 const VideoPlayerWithFullScreen = withFullScreen(VideoPlayer);
 
-export const FilmCard = ({movie, onClick, activeItem, startPlay, isPlayerOn}) => {
-  const {id, name, genre, released, posterImage, backgroundColor, backgroundImage} = movie;
-  const activeTab = (!activeItem) ? `Overview` : activeItem;
-
+export const FilmCard = ({movie, onClick, activeItem, startPlay, isPlayerOn, saveMovieToFavorite, history}) => {
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
   if (isPlayerOn) {
     return <VideoPlayerWithFullScreen/>;
   }
+
+  const {id, name, genre, released, posterImage, backgroundColor, backgroundImage} = movie;
+  const activeTab = (!activeItem) ? `Overview` : activeItem;
 
   return (
     <Fragment>
@@ -78,7 +82,9 @@ export const FilmCard = ({movie, onClick, activeItem, startPlay, isPlayerOn}) =>
           backgroundImage={backgroundImage}
           released={released}
           onPlayClick={startPlay}
+          saveMovieToFavorite={saveMovieToFavorite}
           id={id}
+          history={history}
         />
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
@@ -126,11 +132,13 @@ FilmCard.propTypes = {
     genre: PropTypes.string,
     released: PropTypes.number,
     isFavorite: PropTypes.bool
-  }).isRequired,
+  }),
   onClick: PropTypes.func.isRequired,
   activeItem: PropTypes.string,
   isPlayerOn: PropTypes.bool,
-  startPlay: PropTypes.func.isRequired
+  startPlay: PropTypes.func.isRequired,
+  saveMovieToFavorite: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -143,7 +151,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  startPlay: (movieId) => dispatch(playerAction.startPlay(movieId))
+  startPlay: (movieId) => dispatch(playerAction.startPlay(movieId)),
+  saveMovieToFavorite: (id) => dispatch(userAction.saveMovieToFavorite(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilmCard);

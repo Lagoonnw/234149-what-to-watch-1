@@ -9,7 +9,8 @@ export const Header = (props) => {
   const {
     shouldShowAvatar,
     userPic,
-    className
+    className,
+    movie
   } = props;
 
   return (
@@ -22,9 +23,20 @@ export const Header = (props) => {
         </Link>
       </div>
 
+      {Boolean(movie) && <nav className="breadcrumbs">
+        <ul className="breadcrumbs__list">
+          <li className="breadcrumbs__item">
+            <Link to={`/film/${movie.id}`} className="breadcrumbs__link">{movie.name}</Link>
+          </li>
+          <li className="breadcrumbs__item">
+            <a className="breadcrumbs__link">Add review</a>
+          </li>
+        </ul>
+      </nav>}
+
       <div className="user-block">
         {shouldShowAvatar && <div className="user-block__avatar">
-          <Link to="/favorites">
+          <Link to="/myList">
             <img src={userPic} alt="User avatar" width="63" height="63"/>
           </Link>
         </div>}
@@ -38,7 +50,26 @@ Header.propTypes = {
   shouldShowAvatar: PropTypes.bool,
   userPic: PropTypes.string,
   isAuthorizationRequired: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  movie: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    posterImage: PropTypes.string,
+    previewImage: PropTypes.string,
+    backgroundImage: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    videoLink: PropTypes.string,
+    previewVideoLink: PropTypes.string,
+    description: PropTypes.string,
+    rating: PropTypes.number,
+    scoresCount: PropTypes.number,
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    runTime: PropTypes.number,
+    genre: PropTypes.string,
+    released: PropTypes.number,
+    isFavorite: PropTypes.bool
+  })
 };
 
 Header.defaultProps = {
@@ -51,7 +82,8 @@ const mapStateToProps = (state, ownProps) => {
 
   return Object.assign({}, ownProps, {
     shouldShowAvatar: Boolean(profile),
-    userPic: (profile) ? `${BASE_URL}${profile[`avatarUrl`]}` : null
+    userPic: (profile) ? `${BASE_URL}${profile[`avatarUrl`]}` : null,
+    movie: (ownProps.movie) ? ownProps.movie : null
   });
 };
 

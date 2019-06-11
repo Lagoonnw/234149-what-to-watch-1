@@ -1,6 +1,6 @@
 export const convertObjectKeysToCamel = (obj) => {
-  if (typeof obj !== `object`) {
-    throw Error(`Should be object type`);
+  if (!obj) {
+    return null;
   }
   let key;
   let newKey;

@@ -127,10 +127,7 @@ Array [
     <div
       className="movie-card__bg"
     >
-      <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
-      />
+      <img />
     </div>
     <h1
       className="visually-hidden"
@@ -183,43 +180,38 @@ Array [
       <div
         className="movie-card__info"
       >
-        <div
+        <a
           className="movie-card__poster"
+          href="/film/undefined"
+          onClick={[Function]}
         >
           <img
-            alt="The Grand Budapest Hotel poster"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
           />
-        </div>
+        </a>
         <div
           className="movie-card__desc"
         >
           <h2
             className="movie-card__title"
-          >
-            The Grand Budapest Hotel
-          </h2>
+          />
           <p
             className="movie-card__meta"
           >
             <span
               className="movie-card__genre"
-            >
-              Drama
-            </span>
+            />
             <span
               className="movie-card__year"
-            >
-              2014
-            </span>
+            />
           </p>
           <div
             className="movie-card__buttons"
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -237,6 +229,7 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -259,6 +252,11 @@ Array [
   </section>,
   <div
     className="page-content"
+    style={
+      Object {
+        "background": "000000",
+      }
+    }
   >
     <section
       className="catalog"
@@ -391,7 +389,7 @@ Array [
           onMouseLeave={[Function]}
         >
           <a
-            href="/film/54585444"
+            href="/film/54545454"
             onClick={[Function]}
           >
             <div
@@ -402,6 +400,8 @@ Array [
                 controls={false}
                 height="175px"
                 muted={true}
+                poster="pic.jpg"
+                src="video.mp4"
                 style={
                   Object {
                     "objectFit": "cover",
@@ -416,83 +416,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/film/54585444"
-              onClick={[Function]}
-            >
-              Shutter Island
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <a
-            href="/film/4587653"
-            onClick={[Function]}
-          >
-            <div
-              className="small-movie-card__image"
-            >
-              <video
-                autoPlay={false}
-                controls={false}
-                height="175px"
-                muted={true}
-                style={
-                  Object {
-                    "objectFit": "cover",
-                  }
-                }
-                width="280px"
-              />
-            </div>
-          </a>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="/film/4587653"
-              onClick={[Function]}
-            >
-              Pulp Fiction
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <a
-            href="/film/54546847"
-            onClick={[Function]}
-          >
-            <div
-              className="small-movie-card__image"
-            >
-              <video
-                autoPlay={false}
-                controls={false}
-                height="175px"
-                muted={true}
-                style={
-                  Object {
-                    "objectFit": "cover",
-                  }
-                }
-                width="280px"
-              />
-            </div>
-          </a>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="/film/54546847"
+              href="/film/54545454"
               onClick={[Function]}
             >
               Snatch
@@ -505,7 +429,7 @@ Array [
           onMouseLeave={[Function]}
         >
           <a
-            href="/film/54545454545"
+            href="/film/9898988"
             onClick={[Function]}
           >
             <div
@@ -516,6 +440,8 @@ Array [
                 controls={false}
                 height="175px"
                 muted={true}
+                poster="pic.jpg"
+                src="video.mp4"
                 style={
                   Object {
                     "objectFit": "cover",
@@ -530,10 +456,10 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/film/54545454545"
+              href="/film/9898988"
               onClick={[Function]}
             >
-              Bohemian Rhapsody
+              Pulp Fiction
             </a>
           </h3>
         </article>
@@ -543,7 +469,7 @@ Array [
           onMouseLeave={[Function]}
         >
           <a
-            href="/film/549963331"
+            href="/film/545468787"
             onClick={[Function]}
           >
             <div
@@ -554,6 +480,8 @@ Array [
                 controls={false}
                 height="175px"
                 muted={true}
+                poster="pic.jpg"
+                src="video.mp4"
                 style={
                   Object {
                     "objectFit": "cover",
@@ -568,23 +496,13 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/film/549963331"
+              href="/film/545468787"
               onClick={[Function]}
             >
-              Aviator
+              The Witcher
             </a>
           </h3>
         </article>
-      </div>
-      <div
-        className="catalog__more"
-      >
-        <button
-          className="catalog__button"
-          type="button"
-        >
-          Show more
-        </button>
       </div>
     </section>
     <footer

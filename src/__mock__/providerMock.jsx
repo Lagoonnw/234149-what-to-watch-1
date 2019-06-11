@@ -13,7 +13,8 @@ const mock = [
     previewImage: `pic.jpg`,
     previewVideoLink: `video.mp4`,
     onMouseLeave: jest.fn(),
-    onMouseEnter: jest.fn()
+    onMouseEnter: jest.fn().movies,
+    backgroundColor: `#F5F5F5`
   },
   {
     id: 9898988,
@@ -38,10 +39,18 @@ const initialStateMock = {
   movies: {
     activeGenre: null,
     movies: mock,
-    genres: Array.from(genresList)
+    genres: Array.from(genresList),
+    promoMovie: {}
   },
   user: {
     isAuthorized: false
+  },
+  form: {
+    submitFailed: false
+  },
+  player: {
+    movieId: null,
+    isPlayerOn: false
   }
 };
 const reducer = (state = initialStateMock) => state;

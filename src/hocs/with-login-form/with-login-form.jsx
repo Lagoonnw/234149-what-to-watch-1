@@ -2,8 +2,13 @@ import React, {PureComponent} from 'react';
 import {validator} from '../../helpers/validators/validators';
 import PropTypes from 'prop-types';
 import {makeObjectWithKeysFromArray} from '../../helpers/make-object-keys-from-array/make-object-keys-from-array';
+import {connect} from 'react-redux';
+import {compose} from 'recompose';
+import {userAction} from '../../actions/user/action';
+import {formAction} from '../../actions/form/action';
+import {getFormError} from '../../reducers/form/selector';
 
-export const withFormData = (Component) => {
+export const withLoginForm = (Component) => {
   class WithFormData extends PureComponent {
     constructor(props) {
       super(props);
@@ -21,6 +26,10 @@ export const withFormData = (Component) => {
       };
       this._submitHandler = this._submitHandler.bind(this);
       this._changeHandler = this._changeHandler.bind(this);
+    }
+
+    componentWillUnmount() {
+      this.props.resetFormError();
     }
 
     render() {
@@ -75,15 +84,36 @@ export const withFormData = (Component) => {
 
     _sendForm() {
       const {password, email} = this.state;
+
       this.props.login({email, password})
-        .then(() => this.props.history.goBack());
+        .then(() => {
+          if (!this.props.submitFailed) {
+            this.props.history.goBack();
+          }
+        });
     }
   }
 
   WithFormData.propTypes = {
     login: PropTypes.func.isRequired,
-    history: PropTypes.object
+    history: PropTypes.object,
+    resetFormError: PropTypes.func.isRequired,
+    submitFailed: PropTypes.bool.isRequired
   };
 
   return WithFormData;
 };
+
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  submitFailed: getFormError(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (data) => dispatch(userAction.login(data)),
+  resetFormError: () => dispatch(formAction.resetFormError())
+});
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withLoginForm
+);

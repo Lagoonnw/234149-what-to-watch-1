@@ -20,6 +20,7 @@ const init = () => {
       )
   );
 
+  store.dispatch(moviesAction.loadPromoMovie());
   store.dispatch(moviesAction.loadMovies());
   store.dispatch(userAction.checkUserAuth());
 

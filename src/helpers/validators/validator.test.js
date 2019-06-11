@@ -15,4 +15,9 @@ describe(`Validator test`, () => {
     expect(validator.email(`test@test.com`)).toBeTruthy();
     expect(validator.email(`test`)).toBeFalsy();
   });
+  test(`Should validate string length between min and max`, () => {
+    expect(validator.minMax((`Oops!`).length, {min: 10, max: 120})).toBeFalsy();
+    expect(validator.minMax((`Oops! I did it again`).length, {min: 10, max: 120})).toBeTruthy();
+    expect(validator.minMax(40, {min: 2, max: 12})).toBeFalsy();
+  });
 });
