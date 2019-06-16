@@ -15,6 +15,7 @@ export const withReviewForm = (Component) => {
       this.state = {
         comment: ``,
         rating: null,
+        isSubmiting: false,
         fieldValidity: {
           textarea: false,
           radio: false
@@ -36,7 +37,9 @@ export const withReviewForm = (Component) => {
         onRadioChange: this._radioChangeHandler,
         onSubmit: this._submitHandler,
         rating: this.state.rating,
-        disabled: !(textarea && radio) && !submitFailed
+        disabled: !(textarea && radio) && !submitFailed,
+        formValidity: this.state.fieldValidity,
+        isSubmiting: this.state.isSubmiting
       });
 
       return <Component {...props}/>;
@@ -66,6 +69,9 @@ export const withReviewForm = (Component) => {
       if (!textarea || !radio) {
         return;
       }
+      this.setState({
+        isSubmiting: true
+      });
       sendReview(id, {comment, rating}).then(() => {
         if (!submitFailed) {
           history.push(`/film/${id}`);
