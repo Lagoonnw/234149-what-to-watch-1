@@ -22,6 +22,7 @@ test(`Should render AddReview correctly`, () => {
           onSubmit={jest.fn()}
           rating={4}
           movie={ mockMovie}
+          formValidity={{radio: true, textarea: true}}
         />
       </ProviderMock>, options
   ).toJSON();

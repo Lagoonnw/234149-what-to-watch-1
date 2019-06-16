@@ -4,7 +4,7 @@ import Header from '../header/header.jsx';
 import {RATING_VALUES} from '../../constants/constants';
 
 export const AddReview = (props) => {
-  const {movie, onTextareaChange, onRadioChange, rating, disabled, onSubmit} = props;
+  const {movie, onTextareaChange, onRadioChange, rating, disabled, onSubmit, formValidity, isSubmiting} = props;
 
   if (!movie) {
     return <div>Loading...</div>;
@@ -85,6 +85,7 @@ export const AddReview = (props) => {
                       value={value}
                       onChange={onRadioChange}
                       checked={rating === value}
+                      disabled={isSubmiting}
                     />
                     <label className="rating__label" htmlFor={`star-${value}`}>{`Rating ${value}`}</label>
                   </Fragment>
@@ -94,7 +95,7 @@ export const AddReview = (props) => {
 
             <div className="add-review__text" style={{backgroundColor, filter: `sepia(20%)`}}>
               <textarea className="add-review__textarea" name="review-text" id="review-text"
-                placeholder="Review text" aria-multiline={true} onChange={onTextareaChange}/>
+                placeholder="Review text" aria-multiline={true} onChange={onTextareaChange} disabled={isSubmiting}/>
               <div className="add-review__submit">
                 <button
                   className="add-review__btn"
@@ -107,6 +108,8 @@ export const AddReview = (props) => {
               </div>
             </div>
           </form>
+          {!formValidity.textarea && <p style={{color: `red`}}>Your comment should be from 50 to 400 characters</p>}
+          {!formValidity.radio && <p style={{color: `red`}}>Rating is required</p>}
         </div>
 
       </section>
@@ -138,5 +141,10 @@ AddReview.propTypes = {
   onRadioChange: PropTypes.func.isRequired,
   rating: PropTypes.number,
   disabled: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  formValidity: PropTypes.shape({
+    radio: PropTypes.bool,
+    textarea: PropTypes.bool
+  }),
+  isSubmiting: PropTypes.bool
 };
